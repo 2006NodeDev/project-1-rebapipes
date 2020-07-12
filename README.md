@@ -1,5 +1,5 @@
-# Expense Reimbursement System (ERS) API
-The Expense Reimbursement System (ERS) will manage the process of reimbursing employees for expenses incurred while on company time. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
+# Roadey - Gig Booking & Tour Management
+Roadey puts gig booking and tour management at the tip of your fingers. Whether solo or part of a band, be confident in the direction of your career with our gig booking and tour management app. It's like having a booking manager and tour director all in one. Get ready to hit the road running with Roadey!
 
 # Models
 
@@ -18,7 +18,7 @@ The User model keeps track of users information.
 ```
 
 **Role**  
-The Role model is used to track what permissions a user has
+The Role model is used to track what permissions a user has.
 ```javascript
 {
   roleId: number, // primary key
@@ -26,25 +26,26 @@ The Role model is used to track what permissions a user has
 }
 ```
 
-**Reimbursement**  
-The Reimbursement model is used to represent a single reimbursement that an employee would submit
+**Booking**  
+The Booking model is used to represent a single, booked gig.
 ```javascript
 {
-  reimbursementId: number, // primary key
-	author: number,  // foreign key -> User, not null
-	amount: number,  // not null
+  bookingId: number, // primary key
+	venue: number,  // foreign key -> User, not null
+	payment: number,  // not null
+  gigDate: number, // not null
   dateSubmitted: number, // not null
   dateResolved: number, // not null
   description: string, // not null
   resolver: number, // foreign key -> User
-  status: number, // foreign ey -> ReimbursementStatus, not null
-  type: number // foreign key -> ReimbursementType
+  status: number, // foreign ey -> BookingStatus, not null
+  type: number // foreign key -> BookingType
 }
 ```
 
 
-**ReimbursementStatus**  
-The ReimbursementStatus model is used to track the status of reimbursements. Status possibilities are `Pending`, `Approved`, or `Denied`.
+**BookingStatus**  
+The BookingStatus model is used to track the status of bookings. Status possibilities are `Pending`, `Postponed`, `Cancelled`, or `Booked`.
 ```javascript
 {
   statusId: number, // primary key
@@ -52,8 +53,8 @@ The ReimbursementStatus model is used to track the status of reimbursements. Sta
 }
 ```
 
-**ReimbursementType**  
-The ReimbursementType model is used to track what kind of reimbursement is being submitted. Type possibilities are `Lodging`, `Travel`, `Food`, or `Other`.
+**BookingType**  
+The BookingType model is used to track what kind of booking is being submitted. Type possibilities are `Opening`, `Supporting`, or `Headlining`.
 ```javascript
 {
   typeId: number, // primary key
@@ -112,7 +113,7 @@ The ReimbursementType model is used to track what kind of reimbursement is being
 * **Method:**
   `GET`
 
-* **Allowed Roles** `finance-manager`
+* **Allowed Roles** `admin`
 
 * **Response:**
     ```javascript
@@ -128,7 +129,7 @@ The ReimbursementType model is used to track what kind of reimbursement is being
 * **Method:**
   `GET`
 
-* **Allowed Roles** `finance-manager` or if the id provided matches the id of the current user
+* **Allowed Roles** `admin, user` or if the id provided matches the id of the current user
 
 * **Response:**
     ```javascript
@@ -144,7 +145,7 @@ The ReimbursementType model is used to track what kind of reimbursement is being
 * **Method:**
   `PATCH`
 
-* **Allowed Roles** `admin`
+* **Allowed Roles** `admin, user`
 
 * **Request**
   The userId must be present as well as all fields to update, any field left undefined will not be updated.
@@ -160,85 +161,113 @@ The ReimbursementType model is used to track what kind of reimbursement is being
 ### **Find Reimbursements By Status**  
 Reimbursements should be ordered by date
 * **URL**
-  `/reimbursements/status/:statusId`  
+  `/bookings/status/:statusId`  
   For a challenge you could do this instead:  
-  `/reimbursements/status/:statudId/date-submitted?start=:startDate&end=:endDate`
+  `/bookings/status/:statudId/date-submitted?start=:startDate&end=:endDate`
 
 * **Method:**
   `GET`
 
-* **Allowed Roles** `finance-manager`
+* **Allowed Roles** `admin, user`
 
 * **Response:**
     ```javascript
     [
-      Reimbursement
+      Booking
     ]
     ```
 
-### **Find Reimbursements By User**  
-Reimbursements should be ordered by date
+### **Find Bookings By User**  
+Bookings should be ordered by date.
 * **URL**
-  `/reimbursements/author/userId/:userId`  
+  `/bookings/author/userId/:userId`  
   For a challenge you could do this instead:  
-  `/reimbursements/author/userId/:userId/date-submitted?start=:startDate&end=:endDate`
+  `/bookings/author/userId/:userId/date-submitted?start=:startDate&end=:endDate`
 
 * **Method:**
   `GET`
 
-* **Allowed Roles** `finance-manager` or if ther userId is the user making the request.
+* **Allowed Roles** `admin, user` or if ther userId is the user making the request.
 
 * **Response:**
     ```javascript
     [
-      Reimbursement
+      Booking
     ]
     ```
 
-### **Submit Reimbursement**  
+### **Submit Booking**  
 * **URL**
-  `/reimbursements`
+  `/bookings`
 
 * **Method:**
   `POST`
 
 * **Rquest:**
-  The reimbursementId should be 0
+  The bookingId should be 0
   ```javascript
-  Reimbursement
+    Booking
   ```
 
 * **Response:**
   * **Status Code** 201 CREATED
     ```javascript
-      Reimbursement
+      Booking
     ```
 
 
-### **Update Reimbursement**  
+### **Update Booking**  
 * **URL**
-  `/reimbursements`
+  `/bookings`
 
 * **Method:**
   `PATCH`
 
-* **Allowed Roles** `finance-manager`
+* **Allowed Roles** `admin, user`
 
 * **Request**
-  The reimbursementId must be present as well as all fields to update, any field left undefined will not be updated. This can be used to approve and deny.
+  The bookingId must be present as well as all fields to update, any field left undefined will not be updated. 
   ```javascript
-    Reimbursement
+    Booking
   ```
 
 * **Response:**
     ```javascript
-      Reimbursement
+      Booking
     ```
 
-# Stretch Goals
-These are not part of the core requirements but are things that could be worked on once the core requirements are done.
-  * Password Hashing
-  * Paging ans Sorting endpoints: [Reference For How](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design#filter-and-paginate-data)
-  * Using JSON Web Tokens (JWTs) instead of Session Storage
-  * Being able to submit receipts. (I would recommend using AWS S3/GCP Cloud Storage buckets for this but if you do be cautious of including Access Keys in your application)
+# Architecture Requirements
+  * Website must be deployed in a Cloud Storage bucket acting as a web server
+  * Server will be built with express and deployed on Google Compute Engine
+  * Server should be in a managed instance group with elastic scaling based on user demand
+  * Access to the server will be through Cloud Load balancing, with either http or https
+  * Express server should connect to Cloud Pub Sub to send asynchronous messages to relevant services
+  * Cloud Function should be used for extraneous operations
   
+# Content Requirements
+  * Website should allow a user to access the functionality of the server
+  * Server should send important update through Cloud Pub Sub for other services
+  * Should have at least one Cloud Function that does something interesting
+  * Must support users having at least one image related to them (profile picture), with images stored in    Cloud Storage
+  
+# Functionality Requirements (Users)
+  * Users can create new accounts with the website [POST]
+  * Users can login through the website [POST]
+  * Users can see and update/edit their profile information [PATCH]
+  * Users can see and update/edit their profile picture [PATCH]
+  * Something (feature/functionality) of my choosing
+  
+# Technology Requirements
+  * Compute Engine
+  * Cloud Load Balancing
+  * Cloud Storage (AWS or GCP)
+  * Persistent Disk
+  * VPC (Virtual Private Cloud - Amazon or Google)
+  * Cloud Pub Sub
+  * Cloud Function (GCP)
+  * Cloud SQL
+  * Express Server
+  * React JS
+  * PostgreSQL Database
+  * Pg (Postgres) or Knex for Queries
+  * Redux is optional
