@@ -18,8 +18,8 @@ export async function getAllUsers():Promise<User[]> {
                                             u."last_name", 
                                             u."email", 
                                             r."role_id", 
-                                            r."role" from rappid.users u
-                                            left join rappid.roles r 
+                                            r."role" from roadey.users u
+                                            left join roadey.roles r 
                                             on u."role" = r."role_id"
                                             order by u.user_id;`)
         return results.rows.map(UserDTOtoUserConverter)
@@ -38,14 +38,14 @@ export async function saveOneUser(newUser:User):Promise<User> {
         client = await connectionPool.connect()
         await client.query('BEGIN;')
         let roleId = await client.query(`select r."role_id" 
-                                        from rappid.roles r 
+                                        from roadey.roles r 
                                         where r."role" = $1`,
                                         [newUser.role])
         if(roleId.rowCount === 0) {
             throw new Error('Role Not Found')
         }
         roleId = roleId.rows[0].role_id
-        let results = await client.query(`insert into rappid.users 
+        let results = await client.query(`insert into roadey.users 
                                         ("username", "password", 
                                             "first_name", "last_name", 
                                             "email", "role")
@@ -81,8 +81,8 @@ export async function loginByUsernameAndPassword(username:string, password:strin
                                             u."last_name", 
                                             u."email", 
                                             r."role_id", 
-                                            r."role" from rappid.users u
-                                        left join rappid.roles r 
+                                            r."role" from roadey.users u
+                                        left join roadey.roles r 
                                         on u."role" = r."role_id"
                                         where u."username" = $1 
                                             and u."password" = $2;`,
@@ -115,8 +115,8 @@ export async function getUserById(id:number):Promise<User> {
                                                  u."email",
                                                  r."role_id", 
                                                  r."role" 
-                                              from rappid.users u 
-                                            left join rappid.roles r 
+                                              from roadey.users u 
+                                            left join roadey.roles r 
                                               on u."role" = r."role_id" 
                                                 where u."user_id" = $1;`, [id])
         if(results.rowCount === 0) {
@@ -143,39 +143,39 @@ export async function updateOneUser(updatedOneUser:User):Promise<User> {
         await client.query('BEGIN;')
 
         if(updatedOneUser.username) {
-            await client.query(`update rappid.users set "username" = $1 
+            await client.query(`update roadey.users set "username" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.username, updatedOneUser.userId])
         }
         if(updatedOneUser.password) {
-            await client.query(`update rappid.users set "password" = $1 
+            await client.query(`update roadey.users set "password" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.password, updatedOneUser.userId])
         }
         if(updatedOneUser.firstName) {
-            await client.query(`update rappid.users set "first_name" = $1 
+            await client.query(`update roadey.users set "first_name" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.firstName, updatedOneUser.userId])
         }
         if(updatedOneUser.lastName) {
-            await client.query(`update rappid.users set "last_name" = $1 
+            await client.query(`update roadey.users set "last_name" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.lastName, updatedOneUser.userId])
         }
         if(updatedOneUser.email) {
-            await client.query(`update rappid.users set "email" = $1 
+            await client.query(`update roadey.users set "email" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.email, updatedOneUser.userId])
         }
         if(updatedOneUser.role) {
-            let roleId = await client.query(`select r."role_id" from rappid.roles r 
+            let roleId = await client.query(`select r."role_id" from roadey.roles r 
                                         where r."role" = $1`,
                                         [updatedOneUser.role])
             if(roleId.rowCount === 0) {
                 throw new Error('Role Not Found')
             }
             roleId = roleId.rows[0].role_id
-            await client.query(`update rappid.users set "role" = $1 
+            await client.query(`update roadey.users set "role" = $1 
                                     where "user_id" = $2;`, 
                                     [roleId, updatedOneUser.userId])
         }

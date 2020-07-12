@@ -1,6 +1,6 @@
---create schema rappid;
+--create schema roadey;
 
-set schema 'rappid';
+set schema 'roadey';
 
 --drop table roles cascade;
 --drop table users cascade;
@@ -43,7 +43,7 @@ create table reimbursements (
 
 --------------------------------
 
-set schema 'rappid';
+set schema 'roadey';
 
 insert into roles ("role")
 	values ('Admin'),

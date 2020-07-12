@@ -20,10 +20,10 @@ export async function getAllReimbursements():Promise<Reimbursement[]> {
                                                 rs."status",
                                                 rs."status_id",
                                                 rt."type",
-                                                rt."type_id" from rappid.reimbursements r
-                                            left join rappid.reimbursement_statuses rs
+                                                rt."type_id" from roadey.reimbursements r
+                                            left join roadey.reimbursement_statuses rs
                                                 on r."status" = rs."status_id"
-                                            left join rappid.reimbursement_types rt
+                                            left join roadey.reimbursement_types rt
                                                 on r."type" = rt."type_id"
                                             order by r.date_submitted;`)
         return results.rows.map(ReimbursementDTOtoReimbursementConverter)
@@ -51,10 +51,10 @@ export async function getReimbursementByStatus(status:number):Promise<Reimbursem
                                                 rs."status",
                                                 rt."type_id",
                                                 rt."type"
-                                                    from rappid.reimbursements r 
-                                            left join rappid.reimbursement_statuses rs
+                                                    from roadey.reimbursements r 
+                                            left join roadey.reimbursement_statuses rs
                                                 on r."status" = rs."status_id" 
-                                            left join rappid.reimbursement_types rt
+                                            left join roadey.reimbursement_types rt
                                                 on r."type" = rt."type_id"
                                                     where r."status" = $1
                                             order by r.date_submitted;`, [status])
@@ -86,12 +86,12 @@ export async function getReimbursementByUserId(userId:number):Promise<Reimbursem
                                                 r."description", r."resolver",
                                                 rs."status_id", rs."status",
                                                 rt."type_id", rt."type"
-                                            from rappid.reimbursements r 
-                                            left join rappid.reimbursement_statuses rs
+                                            from roadey.reimbursements r 
+                                            left join roadey.reimbursement_statuses rs
                                                 on r."status" = rs."status_id" 
-                                            left join rappid.reimbursement_types rt
+                                            left join roadey.reimbursement_types rt
                                                 on r."type" = rt."type_id"
-                                            left join rappid.users u 
+                                            left join roadey.users u 
                                                 on r."author" = u."user_id"
                                                     where u."user_id" = $1
                                             order by r.date_submitted;`, [userId])
@@ -117,7 +117,7 @@ export async function submitOneReimbursement(newReimbursement:Reimbursement):Pro
     try {
         client = await connectionPool.connect()
         await client.query('BEGIN;')
-        let typeId = await client.query(`select t."type_id" from rappid.reimbursement_types t 
+        let typeId = await client.query(`select t."type_id" from roadey.reimbursement_types t 
                                             where t."type" = $1;`,
                                         [newReimbursement.type])
         if(typeId.rowCount === 0) {
@@ -125,7 +125,7 @@ export async function submitOneReimbursement(newReimbursement:Reimbursement):Pro
         }
         typeId = typeId.rows[0].type_id 
         
-        let results = await client.query(`insert into rappid.reimbursements ("author", "amount", 
+        let results = await client.query(`insert into roadey.reimbursements ("author", "amount", 
                                         "date_submitted", "description", "status", "type")
                                             values($1,$2,$3,$4,$5,$6) 
                                         returning "reimbursement_id";`,
@@ -156,54 +156,54 @@ export async function updateOneReimbursement(updatedOneReimbursement:Reimburseme
         await client.query('BEGIN;')
 
         if(updatedOneReimbursement.author) {
-            await client.query(`update rappid.reimbursements set "author" = $1 
+            await client.query(`update roadey.reimbursements set "author" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.author, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.amount) {
-            await client.query(`update rappid.reimbursements set "amount" = $1 
+            await client.query(`update roadey.reimbursements set "amount" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.amount, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.dateSubmitted) {
-            await client.query(`update rappid.reimbursements set "date_submitted" = $1 
+            await client.query(`update roadey.reimbursements set "date_submitted" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.dateSubmitted, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.dateResolved) {
-            await client.query(`update rappid.reimbursements set "date_resolved" = $1 
+            await client.query(`update roadey.reimbursements set "date_resolved" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.dateResolved, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.description) {
-            await client.query(`update rappid.reimbursements set "description" = $1 
+            await client.query(`update roadey.reimbursements set "description" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.description, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.resolver) {
-            await client.query(`update rappid.reimbursements set "resolver" = $1 
+            await client.query(`update roadey.reimbursements set "resolver" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [updatedOneReimbursement.resolver, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.status) {
-            let statusId = await client.query(`select rs."status_id" from rappid.reimbursement_statuses rs 
+            let statusId = await client.query(`select rs."status_id" from roadey.reimbursement_statuses rs 
                                             where rs."status" = $1;`, [updatedOneReimbursement.status])
             if(statusId.rowCount === 0) {
                 throw new Error('Status Not Found')
             }
             statusId = statusId.rows[0].status_id
-            await client.query(`update rappid.reimbursements set "status" = $1 
+            await client.query(`update roadey.reimbursements set "status" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [statusId, updatedOneReimbursement.reimbursementId])
         }
         if(updatedOneReimbursement.type) {
-            let typeId = await client.query(`select rt."type_id" from rappid.reimbursement_types rt 
+            let typeId = await client.query(`select rt."type_id" from roadey.reimbursement_types rt 
                                             where rt."type" = $1;`, [updatedOneReimbursement.type])
             if(typeId.rowCount === 0) {
                 throw new Error('Type Not Found')
             }
             typeId = typeId.rows[0].type_id
-            await client.query(`update rappid.reimbursements set "type" = $1 
+            await client.query(`update roadey.reimbursements set "type" = $1 
                                 where "reimbursement_id" = $2;`, 
                                 [typeId, updatedOneReimbursement.reimbursementId])
         }
