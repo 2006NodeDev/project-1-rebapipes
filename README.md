@@ -1,5 +1,7 @@
 # Roadey - Gig Booking & Tour Management
-Roadey puts gig booking and tour management at the tip of your fingers. Whether solo or part of a band, be confident in the direction of your career with our gig booking and tour management app. It's like having a booking manager and tour director all in one. Get ready to hit the road running with Roadey!
+Roadey puts gig booking and tour management at the tip of your fingers. Whether solo or part of a band, be confident in the direction of your career with our gig booking and tour management app. 
+
+It's like having a booking manager and tour director all in one! Get ready to hit the road running with Roadey!
 
 # Models
 
