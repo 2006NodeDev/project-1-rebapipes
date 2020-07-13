@@ -8,7 +8,7 @@ export class Booking {
     payment: number //not null
     gigDate: Date //not null
     dateSubmitted: Date //not null
-    dateResolved: Date //allowed this to be null for Pending reimbursements
+    dateResolved: Date //allowed this to be null for Pending bookings
     description: string //not null
     status: BookingStatus //foreign key -> BookingStatus, not null
     type: BookingType //foreign key -> BookingType
