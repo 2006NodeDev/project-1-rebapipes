@@ -3,7 +3,7 @@ import { UserInputError } from '../errors/UserInputError'
 import { reimbursementStatusRouter } from './booking-status-router'
 import { reimbursementAuthorRouter } from './reimbursement-author-router'
 import { Reimbursement } from '../models/booking'
-import { submitOneReimbursement, updateOneReimbursement, getAllReimbursements } from '../daos/reimbursement-dao'
+import { submitOneReimbursement, updateOneReimbursement, getAllReimbursements } from '../daos/booking-dao'
 import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
