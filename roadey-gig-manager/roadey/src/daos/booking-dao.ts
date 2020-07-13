@@ -1,32 +1,32 @@
-import { Reimbursement } from "../models/booking";
+import { Booking } from "../models/booking";
 import { PoolClient } from "pg";
 import { connectionPool } from ".";
-import { ReimbursementDTOtoReimbursementConverter } from "../utils/Booking-DTO-to-Booking-converter";
-import { ReimbursementNotFoundError } from "../errors/BookingNotFoundError";
-import { ReimbursementInputError } from "../errors/BookingInputError";
+import { BookingDTOtoBookingConverter } from "../utils/Booking-DTO-to-Booking-converter";
+import { BookingNotFoundError } from "../errors/BookingNotFoundError";
+import { BookingInputError } from "../errors/BookingInputError";
 
-// Get all Reimbursements
-export async function getAllReimbursements():Promise<Reimbursement[]> {
+// Get all Bookings
+export async function getAllBookings():Promise<Booking[]> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
-        let results = await client.query(`select r."reimbursement_id", 
-                                                r."author", 
-                                                r."amount", 
-                                                r."date_submitted", 
-                                                r."date_resolved", 
-                                                r."description", 
-                                                r."resolver", 
-                                                rs."status",
-                                                rs."status_id",
-                                                rt."type",
-                                                rt."type_id" from roadey.reimbursements r
-                                            left join roadey.reimbursement_statuses rs
-                                                on r."status" = rs."status_id"
-                                            left join roadey.reimbursement_types rt
-                                                on r."type" = rt."type_id"
-                                            order by r.date_submitted;`)
-        return results.rows.map(ReimbursementDTOtoReimbursementConverter)
+        let results = await client.query(`select b."booking_id", 
+                                                b."venue", 
+                                                b."payment", 
+                                                b."gig_date",
+                                                b."date_submitted", 
+                                                b."date_resolved", 
+                                                b."description",  
+                                                bs."status",
+                                                bs."status_id",
+                                                bt."type",
+                                                bt."type_id" from roadey.bookings b
+                                            left join roadey.booking_statuses bs
+                                                on b."status" = bs."status_id"
+                                            left join roadey.booking_types bt
+                                                on b."type" = bt."type_id"
+                                            order by b.date_submitted;`)
+        return results.rows.map(BookingDTOtoBookingConverter)
     } catch (e) {
         console.log(e);
         throw new Error('Unhandled Error Occured')
@@ -35,36 +35,36 @@ export async function getAllReimbursements():Promise<Reimbursement[]> {
     }
 }
 
-// Find Reimbursement(s) by Status
-export async function getReimbursementByStatus(status:number):Promise<Reimbursement[]> {
+// Find Booking(s) by Status
+export async function getBookingByStatus(status:number):Promise<Booking[]> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
-        let results = await client.query(`select r."reimbursement_id", 
-                                                r."author", 
-                                                r."amount", 
-                                                r."date_submitted",
-                                                r."date_resolved",
-                                                r."description",
-                                                r."resolver",
-                                                rs."status_id", 
-                                                rs."status",
-                                                rt."type_id",
-                                                rt."type"
-                                                    from roadey.reimbursements r 
-                                            left join roadey.reimbursement_statuses rs
-                                                on r."status" = rs."status_id" 
-                                            left join roadey.reimbursement_types rt
-                                                on r."type" = rt."type_id"
-                                                    where r."status" = $1
-                                            order by r.date_submitted;`, [status])
+        let results = await client.query(`select b."booking_id", 
+                                                b."venue", 
+                                                b."payment", 
+                                                b."gig_date",
+                                                b."date_submitted",
+                                                b."date_resolved",
+                                                b."description",
+                                                bs."status_id", 
+                                                bs."status",
+                                                bt."type_id",
+                                                bt."type"
+                                                    from roadey.bookings b
+                                            left join roadey.booking_statuses bs
+                                                on b."status" = bs."status_id" 
+                                            left join roadey.booking_types bt
+                                                on b."type" = bt."type_id"
+                                                    where b."status" = $1
+                                            order by b.date_submitted;`, [status])
         if(results.rowCount === 0) {
-            throw new Error('Reimbursement Not Found')
+            throw new Error('Booking Not Found')
         }
-        return results.rows.map(ReimbursementDTOtoReimbursementConverter);
+        return results.rows.map(BookingDTOtoBookingConverter);
     } catch (e) {
-        if(e.message === 'Reimbursement Not Found') {
-            throw new ReimbursementNotFoundError()
+        if(e.message === 'Booking Not Found') {
+            throw new BookingNotFoundError()
         }
         console.log(e);
         throw new Error('Unknown Error Occured')
@@ -74,34 +74,35 @@ export async function getReimbursementByStatus(status:number):Promise<Reimbursem
 }
 
 
-// Find Reimbursement(s) by User
-export async function getReimbursementByUserId(userId:number):Promise<Reimbursement[]> {
+// Find Booking(s) by User
+export async function getBookingByUserId(userId:number):Promise<Booking[]> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
-        let results = await client.query(`select r."reimbursement_id", 
-                                                r."author", r."amount", 
-                                                r."date_submitted",
-                                                r."date_resolved",
-                                                r."description", r."resolver",
-                                                rs."status_id", rs."status",
-                                                rt."type_id", rt."type"
-                                            from roadey.reimbursements r 
-                                            left join roadey.reimbursement_statuses rs
-                                                on r."status" = rs."status_id" 
-                                            left join roadey.reimbursement_types rt
-                                                on r."type" = rt."type_id"
+        let results = await client.query(`select b."booking_id", 
+                                                b."venue", b."payment",
+                                                b."gig_date", 
+                                                b."date_submitted",
+                                                b."date_resolved",
+                                                b."description", 
+                                                bs."status_id", bs."status",
+                                                bt."type_id", bt."type"
+                                            from roadey.bookings b
+                                            left join roadey.booking_statuses bs
+                                                on b."status" = bs."status_id" 
+                                            left join roadey.booking_types bt
+                                                on b."type" = bt."type_id"
                                             left join roadey.users u 
-                                                on r."author" = u."user_id"
+                                                on b."author" = u."user_id"
                                                     where u."user_id" = $1
-                                            order by r.date_submitted;`, [userId])
+                                            order by b.date_submitted;`, [userId])
         if(results.rowCount === 0) {
-            throw new Error('Reimbursement Not Found')
+            throw new Error('Booking Not Found')
         }
-        return results.rows.map(ReimbursementDTOtoReimbursementConverter);
+        return results.rows.map(BookingDTOtoBookingConverter);
     } catch (e) {
-        if(e.message === 'Reimbursement Not Found') {
-            throw new ReimbursementNotFoundError()
+        if(e.message === 'Booking Not Found') {
+            throw new BookingNotFoundError()
         }
         console.log(e);
         throw new Error('Unknown Error Occured')
@@ -111,15 +112,15 @@ export async function getReimbursementByUserId(userId:number):Promise<Reimbursem
 }
 
 
-// Submit a Reimbursement
-export async function submitOneReimbursement(newReimbursement:Reimbursement):Promise<Reimbursement> {
+// Submit a Booking
+export async function submitOneBooking(newReimbursement:Booking):Promise<Booking> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
         await client.query('BEGIN;')
         let typeId = await client.query(`select t."type_id" from roadey.reimbursement_types t 
                                             where t."type" = $1;`,
-                                        [newReimbursement.type])
+                                        [newBooking.type])
         if(typeId.rowCount === 0) {
             throw new Error('Type Not Found')
         }
@@ -138,7 +139,7 @@ export async function submitOneReimbursement(newReimbursement:Reimbursement):Pro
     } catch (e) {
         client && client.query('ROLLBACK;')
         if(e.message === 'Type Not Found' || e.message === 'Status Not Found') {
-            throw new ReimbursementInputError()
+            throw new BookingInputError()
         } 
         console.log(e);
         throw new Error('Unknown Error Occured')
@@ -148,8 +149,8 @@ export async function submitOneReimbursement(newReimbursement:Reimbursement):Pro
 }
 
 
-// Update a Reimbursement
-export async function updateOneReimbursement(updatedOneReimbursement:Reimbursement):Promise<Reimbursement> {
+// Update a Booking
+export async function updateOneReimbursement(updatedOneReimbursement:Booking):Promise<Booking> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
