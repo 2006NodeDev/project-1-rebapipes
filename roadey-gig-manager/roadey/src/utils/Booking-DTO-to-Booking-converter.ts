@@ -1,7 +1,7 @@
 import { BookingDTO } from "../dtos/booking-dto";
 import { Booking } from "../models/booking";
 
-// BookingDTO takes objects in DB format & converts it to Reimbursement model object(s)
+// BookingDTO takes objects in DB format & converts it to Booking model object(s)
 export function BookingDTOtoBookingConverter(bdto: BookingDTO): Booking {
     return {
         bookingId: bdto.booking_id,
