@@ -1,9 +1,9 @@
-// Reimbursement data from DB
+// Booking data from DB
 
 export class ReimbursementDTO {
   reimbursement_id: number
     author: number
-    amount: number
+    payment: number
     date_submitted: Date
     date_resolved: Date
     description: string

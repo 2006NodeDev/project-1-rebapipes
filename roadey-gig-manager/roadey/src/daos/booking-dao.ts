@@ -113,7 +113,7 @@ export async function getBookingByUserId(userId:number):Promise<Booking[]> {
 
 
 // Submit a Booking
-export async function submitOneBooking(newReimbursement:Booking):Promise<Booking> {
+export async function submitOneBooking(newBooking:Booking):Promise<Booking> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
@@ -126,16 +126,16 @@ export async function submitOneBooking(newReimbursement:Booking):Promise<Booking
         }
         typeId = typeId.rows[0].type_id 
         
-        let results = await client.query(`insert into roadey.reimbursements ("author", "amount", 
+        let results = await client.query(`insert into roadey.reimbursements ("author", "payment", 
                                         "date_submitted", "description", "status", "type")
                                             values($1,$2,$3,$4,$5,$6) 
                                         returning "reimbursement_id";`,
-                                        [newReimbursement.author, newReimbursement.amount, newReimbursement.dateSubmitted,
-                                            newReimbursement.description, newReimbursement.status.statusId, typeId]) 
-        newReimbursement.reimbursementId = results.rows[0].reimbursement_id
+                                        [newBooking.author, newBooking.payment, newBooking.dateSubmitted,
+                                            newBooking.description, newBooking.status.statusId, typeId]) 
+        newBooking.bookingId = results.rows[0].reimbursement_id
         
         await client.query('COMMIT;')
-        return newReimbursement
+        return newBooking
     } catch (e) {
         client && client.query('ROLLBACK;')
         if(e.message === 'Type Not Found' || e.message === 'Status Not Found') {
@@ -150,67 +150,67 @@ export async function submitOneBooking(newReimbursement:Booking):Promise<Booking
 
 
 // Update a Booking
-export async function updateOneReimbursement(updatedOneReimbursement:Booking):Promise<Booking> {
+export async function updateOneBooking(updatedOneBooking:Booking):Promise<Booking> {
     let client:PoolClient
     try {
         client = await connectionPool.connect()
         await client.query('BEGIN;')
 
-        if(updatedOneReimbursement.author) {
+        if(updatedOneBooking.author) {
             await client.query(`update roadey.reimbursements set "author" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.author, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.author, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.amount) {
-            await client.query(`update roadey.reimbursements set "amount" = $1 
+        if(updatedOneBooking.payment) {
+            await client.query(`update roadey.reimbursements set "payment" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.amount, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.payment, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.dateSubmitted) {
+        if(updatedOneBooking.dateSubmitted) {
             await client.query(`update roadey.reimbursements set "date_submitted" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.dateSubmitted, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.dateSubmitted, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.dateResolved) {
+        if(updatedOneBooking.dateResolved) {
             await client.query(`update roadey.reimbursements set "date_resolved" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.dateResolved, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.dateResolved, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.description) {
+        if(updatedOneBooking.description) {
             await client.query(`update roadey.reimbursements set "description" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.description, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.description, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.resolver) {
+        if(updatedOneBooking.resolver) {
             await client.query(`update roadey.reimbursements set "resolver" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [updatedOneReimbursement.resolver, updatedOneReimbursement.reimbursementId])
+                                [updatedOneBooking.resolver, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.status) {
+        if(updatedOneBooking.status) {
             let statusId = await client.query(`select rs."status_id" from roadey.reimbursement_statuses rs 
-                                            where rs."status" = $1;`, [updatedOneReimbursement.status])
+                                            where rs."status" = $1;`, [updatedOneBooking.status])
             if(statusId.rowCount === 0) {
                 throw new Error('Status Not Found')
             }
             statusId = statusId.rows[0].status_id
             await client.query(`update roadey.reimbursements set "status" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [statusId, updatedOneReimbursement.reimbursementId])
+                                [statusId, updatedOneBooking.bookingId])
         }
-        if(updatedOneReimbursement.type) {
+        if(updatedOneBooking.type) {
             let typeId = await client.query(`select rt."type_id" from roadey.reimbursement_types rt 
-                                            where rt."type" = $1;`, [updatedOneReimbursement.type])
+                                            where rt."type" = $1;`, [updatedOneBooking.type])
             if(typeId.rowCount === 0) {
                 throw new Error('Type Not Found')
             }
             typeId = typeId.rows[0].type_id
             await client.query(`update roadey.reimbursements set "type" = $1 
                                 where "reimbursement_id" = $2;`, 
-                                [typeId, updatedOneReimbursement.reimbursementId])
+                                [typeId, updatedOneBooking.bookingId])
         }
 
         await client.query('COMMIT;')
-        return updatedOneReimbursement
+        return updatedOneBooking
     } catch(e) {
         client && client.query('ROLLBACK;')
         if(e.message == 'Status Not Found' || e.message == 'Type Not Found') {

@@ -156,8 +156,8 @@ The BookingType model is used to track what kind of booking is being submitted. 
       User
     ```
 
-### **Find Reimbursements By Status**  
-Reimbursements should be ordered by date
+### **Find Bookings By Status**  
+Bookings should be ordered by date
 * **URL**
   `/bookings/status/:statusId`  
   For a challenge you could do this instead:  

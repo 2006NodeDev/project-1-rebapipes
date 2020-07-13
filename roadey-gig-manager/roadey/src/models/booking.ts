@@ -1,10 +1,10 @@
 import { ReimbursementStatus } from "./booking-status"
 import { ReimbursementType } from "./booking-type"
 
-export class Reimbursement {
-    reimbursementId: number //primary key
+export class Booking {
+    bookingId: number //primary key
     author: number //foreign key -> user not null
-    amount: number //not null
+    payment: number //not null
     dateSubmitted: Date //not null
     dateResolved: Date //allowed this to be null for Pending reimbursements
     description: string //not null

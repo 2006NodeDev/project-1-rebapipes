@@ -1,48 +1,51 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { UserInputError } from '../errors/UserInputError'
-import { reimbursementStatusRouter } from './booking-status-router'
-import { reimbursementAuthorRouter } from './booking-author-router'
-import { Reimbursement } from '../models/booking'
-import { submitOneReimbursement, updateOneReimbursement, getAllReimbursements } from '../daos/booking-dao'
+import { bookingStatusRouter } from './booking-status-router'
+import { bookingAuthorRouter } from './booking-author-router'
+import { Booking } from '../models/booking'
+import { submitOneBooking, updateOneBooking, getAllBookings } from '../daos/booking-dao'
 import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
-export const reimbursementRouter = express.Router()
+export const bookingRouter = express.Router()
 
-reimbursementRouter.use(authenticationMiddleware)
-//Redirect all requests on /reimbursement/status to reimbursement-status-router
-reimbursementRouter.use('/status', reimbursementStatusRouter)
-//Redirect all requests on /reimbursement/author/userId to reimbursement-author-router
-reimbursementRouter.use('/author/userId', reimbursementAuthorRouter)
+bookingRouter.use(authenticationMiddleware)
+//Redirect all requests on /booking/status to booking-status-router
+bookingRouter.use('/status', bookingStatusRouter)
+//Redirect all requests on /booking/author/userId to booking-author-router
+bookingRouter.use('/author/userId', bookingAuthorRouter)
 
-//Get All Reimbursements
-reimbursementRouter.get('/', authorizationMiddleware(['Admin', 'Finance Manager']), async (req:Request, res:Response, next:NextFunction) => { 
+//Get All Bookings
+bookingRouter.get('/', authorizationMiddleware(['Admin', 'User', 'Current']), async (req:Request, res:Response, next:NextFunction) => { 
     try {
-        let allReims = await getAllReimbursements()
+        let allReims = await getAllBookings()
         res.json(allReims)
     } catch (e) {
         next(e)
     }
 })
 
-//Submit Reimbursement
-reimbursementRouter.post('/', authorizationMiddleware(['Admin', 'Finance Manager', 'User']), async (req:Request, res:Response, next:NextFunction) => {
+//Submit Booking
+bookingRouter.post('/', authorizationMiddleware(['Admin', 'User', 'Current']), async (req:Request, res:Response, next:NextFunction) => {
     console.log(req.body);
     let { 
         author,
-        amount,
+        venue,
+        payment,
+        gigDate,
         dateSubmitted,
         description,
         type } = req.body
-    if(author && amount && dateSubmitted && description && type) {
-        let newReimbursement: Reimbursement = {
-            reimbursementId: 0,
+    if(author && payment && dateSubmitted && description && type) {
+        let newBooking: Booking = {
+            bookingId: 0,
             author,
-            amount,
+            venue,
+            payment,
+            gigDate,
             dateSubmitted,
             dateResolved: null,
             description,
-            resolver: null,
             status: //status is automatically 1:"Pending"
                 {
                     status: 'Pending',
@@ -50,10 +53,10 @@ reimbursementRouter.post('/', authorizationMiddleware(['Admin', 'Finance Manager
                 },
             type
         }
-        newReimbursement.type = type || null
+        newBooking.type = type || null
         try {
-            let savedReimbursement = await submitOneReimbursement(newReimbursement)
-            res.json(savedReimbursement)
+            let savedBooking = await submitOneBooking(newBooking)
+            res.json(savedBooking)
         } catch (e) {
             next(e)
         }
@@ -63,45 +66,48 @@ reimbursementRouter.post('/', authorizationMiddleware(['Admin', 'Finance Manager
     }
 })
 
-//Update Reimbursement, we assume Admin and Finance Manager have userId for each user
-reimbursementRouter.patch('/', authorizationMiddleware(['Admin', 'Finance Manager']), async (req:Request, res:Response, next:NextFunction) => {
-    let { reimbursementId,
+//Update Booking, we assume Admin has userId for each user
+bookingRouter.patch('/', authorizationMiddleware(['Admin', 'User', 'Current']), async (req:Request, res:Response, next:NextFunction) => {
+    let { bookingId,
         author,
-        amount,
+        venue,
+        payment,
+        gigDate,
         dateSubmitted,
         dateResolved,
         description,
-        resolver,
         status,
         type } = req.body
-    if(!reimbursementId) { //update request must contain a reimbursementId
-        res.status(400).send('Please enter a valid reimbursement Id')
+    if(!bookingId) { //update request must contain a bookingId
+        res.status(400).send('Please enter a valid booking Id')
     }
-    else if(isNaN(+reimbursementId)) { //check if reimbursementId is valid
+    else if(isNaN(+bookingId)) { //check if bookingId is valid
         res.status(400).send('Id must be a number')
     }
     else { 
-        let updatedOneReimbursement:Reimbursement = { 
-            reimbursementId, 
+        let updatedOneBooking:Booking = { 
+            bookingId, 
             author,
-            amount,
+            venue,
+            payment,
+            gigDate,
             dateSubmitted,
             dateResolved,
             description,
-            resolver,
             status,
             type
         }
-        updatedOneReimbursement.author = author || undefined
-        updatedOneReimbursement.amount = amount || undefined
-        updatedOneReimbursement.dateSubmitted = dateSubmitted || undefined
-        updatedOneReimbursement.dateResolved = dateResolved || undefined
-        updatedOneReimbursement.description = description || undefined
-        updatedOneReimbursement.resolver = resolver || undefined
-        updatedOneReimbursement.status = status || undefined
-        updatedOneReimbursement.type = type || undefined
+        updatedOneBooking.author = author || undefined
+        updatedOneBooking.venue = venue || undefined
+        updatedOneBooking.payment = payment || undefined
+        updatedOneBooking.gigDate = gigDate || undefined
+        updatedOneBooking.dateSubmitted = dateSubmitted || undefined
+        updatedOneBooking.dateResolved = dateResolved || undefined
+        updatedOneBooking.description = description || undefined
+        updatedOneBooking.status = status || undefined
+        updatedOneBooking.type = type || undefined
         try {
-            let results = await updateOneReimbursement(updatedOneReimbursement)
+            let results = await updateOneBooking(updatedOneBooking)
             res.json(results)
         } catch (e) {
             next(e)
