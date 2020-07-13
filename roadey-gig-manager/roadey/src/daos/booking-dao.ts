@@ -129,10 +129,10 @@ export async function submitOneBooking(newBooking:Booking):Promise<Booking> {
         let results = await client.query(`insert into roadey.reimbursements ("author", "payment", 
                                         "date_submitted", "description", "status", "type")
                                             values($1,$2,$3,$4,$5,$6) 
-                                        returning "reimbursement_id";`,
+                                        returning "booking_id";`,
                                         [newBooking.author, newBooking.payment, newBooking.dateSubmitted,
                                             newBooking.description, newBooking.status.statusId, typeId]) 
-        newBooking.bookingId = results.rows[0].reimbursement_id
+        newBooking.bookingId = results.rows[0].booking_id
         
         await client.query('COMMIT;')
         return newBooking
@@ -158,32 +158,32 @@ export async function updateOneBooking(updatedOneBooking:Booking):Promise<Bookin
 
         if(updatedOneBooking.author) {
             await client.query(`update roadey.reimbursements set "author" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.author, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.payment) {
             await client.query(`update roadey.reimbursements set "payment" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.payment, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.dateSubmitted) {
             await client.query(`update roadey.reimbursements set "date_submitted" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.dateSubmitted, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.dateResolved) {
             await client.query(`update roadey.reimbursements set "date_resolved" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.dateResolved, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.description) {
             await client.query(`update roadey.reimbursements set "description" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.description, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.resolver) {
             await client.query(`update roadey.reimbursements set "resolver" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [updatedOneBooking.resolver, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.status) {
@@ -194,7 +194,7 @@ export async function updateOneBooking(updatedOneBooking:Booking):Promise<Bookin
             }
             statusId = statusId.rows[0].status_id
             await client.query(`update roadey.reimbursements set "status" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [statusId, updatedOneBooking.bookingId])
         }
         if(updatedOneBooking.type) {
@@ -205,7 +205,7 @@ export async function updateOneBooking(updatedOneBooking:Booking):Promise<Bookin
             }
             typeId = typeId.rows[0].type_id
             await client.query(`update roadey.reimbursements set "type" = $1 
-                                where "reimbursement_id" = $2;`, 
+                                where "booking_id" = $2;`, 
                                 [typeId, updatedOneBooking.bookingId])
         }
 

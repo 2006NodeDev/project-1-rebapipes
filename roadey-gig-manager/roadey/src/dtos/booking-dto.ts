@@ -1,13 +1,14 @@
 // Booking data from DB
 
-export class ReimbursementDTO {
-  reimbursement_id: number
+export class BookingDTO {
+  booking_id: number
     author: number
+    venue: string
     payment: number
+    gig_date: Date
     date_submitted: Date
     date_resolved: Date
     description: string
-    resolver: number
     status: string
     status_id: number
     type: string
