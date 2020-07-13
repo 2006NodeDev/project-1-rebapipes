@@ -5,6 +5,7 @@ import { Booking } from "../models/booking";
 export function BookingDTOtoBookingConverter(bdto: BookingDTO): Booking {
     return {
         bookingId: bdto.booking_id,
+        author: bdto.author,
         venue: bdto.venue,
         payment: bdto.payment,
         gigDate: new Date(bdto.gig_date),
