@@ -214,7 +214,7 @@ export async function updateOneBooking(updatedOneBooking:Booking):Promise<Bookin
     } catch(e) {
         client && client.query('ROLLBACK;')
         if(e.message == 'Status Not Found' || e.message == 'Type Not Found') {
-            throw new ReimbursementInputError()
+            throw new BookingInputError()
         }
         console.log(e);
         throw new Error('Unknown Error Occured')

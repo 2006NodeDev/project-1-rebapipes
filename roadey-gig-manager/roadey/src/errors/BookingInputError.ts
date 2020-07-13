@@ -1,6 +1,6 @@
 import { HttpError } from "./HttpError";
 
-export class ReimbursementInputError extends HttpError {
+export class BookingInputError extends HttpError {
     constructor() {
         super(400, 'Please fill out all fields')
     }
