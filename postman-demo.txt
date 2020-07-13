@@ -3,22 +3,22 @@
 // Body
 
 {
-    "username" : "naturalselection",
-    "password" : "darwinism"
+    "username" : "",
+    "password" : ""
 }
 
 // Output (LOGIN BY USER)
 
 {
-    "userId": 1,
-    "username": "naturalselection",
-    "password": "darwinism",
-    "firstName": "Charles",
-    "lastName": "Darwin",
-    "email": "charles.darwin@jurassicpark.com",
+    "userId": ,
+    "username": "",
+    "password": "",
+    "firstName": "",
+    "lastName": "",
+    "email": "",
     "role": {
-        "role": "Admin",
-        "roleId": 1
+        "role": "",
+        "roleId": 
     }
 }
 
@@ -29,22 +29,22 @@
 // Body
 
 {
-    "username" : "jurassicparka",
-    "password" : "friends"
+    "username" : "",
+    "password" : ""
 }
 
 // Output (LOGIN BY USER)
 
 {
-    "userId": 3,
-    "username": "jurassicparka",
-    "password": "friends",
-    "firstName": "Benjamin",
-    "lastName": "Lockwood",
-    "email": "benjamin.lockwood@jurassicpark.com",
+    "userId": ,
+    "username": "",
+    "password": "",
+    "firstName": "",
+    "lastName": "",
+    "email": "",
     "role": {
-        "role": "Finance Manager",
-        "roleId": 2
+        "role": "",
+        "roleId": 
     }
 }
 
@@ -71,15 +71,15 @@
 // Output (FIND USERS BY ID)
 
 {
-    "userId": 4,
-    "username": "babysharkdoodoo",
-    "password": "doodoodoodoo",
-    "firstName": "Ellie",
-    "lastName": "Sattler",
-    "email": "ellie.sattler@jurassicpark.com",
+    "userId": ,
+    "username": "",
+    "password": "",
+    "firstName": "",
+    "lastName": "",
+    "email": "",
     "role": {
-        "role": "User",
-        "roleId": 3
+        "role": "",
+        "roleId": 
     }
 }
 
@@ -90,123 +90,124 @@
 // Body
 
 {
-    "userId": 8,
-    "username": "ibelieve",
-    "password": "ineverything"
+    "userId": ,
+    "username": "",
+    "password": ""
 }
 
 // Output (UPDATE USER)
 
 {
     "userId": 8,
-    "username": "ibelieve",
-    "password": "ineverything"
+    "username": "",
+    "password": ""
 }
 
 -----------------------------------------------------
 
-6) GET --> http://localhost:2006/reimbursements
+6) GET --> http://localhost:2006/bookings
 
 // Body
 
 (GET DOESN'T HAVE A BODY)
 
-// Output (FIND REIMBURSEMENTS - ALL)
+// Output (FIND BOOKINGS - ALL)
 
 -----------------------------------------------------
 
-7) GET --> http://localhost:2006/reimbursements/status/1 
+7) GET --> http://localhost:2006/bookings/status/1 
 
 // Body
 
 (GET DOESN'T HAVE A BODY)        
 
-// Output (FIND REIMBURSEMENT BY STATUS - PENDING (1))
+// Output (FIND BOOKING BY STATUS - PENDING (1))
 
 [
     {
-        "reimbursementId": 10,
-        "author": 8,
-        "amount": "900.00",
-        "dateSubmitted": "1990-06-11T13:44:00.000Z",
-        "dateResolved": "1990-06-11T13:54:00.000Z",
-        "description": "Hired new trainer - Alec was eaten by Allosaurus",
-        "resolver": 3,
+        "bookingId": ,
+        "venue": ,
+        "payment": "",
+        "gigDate": "",
+        "dateSubmitted": "",
+        "dateResolved": "",
+        "description": "",
         "status": {
-            "status": "Pending",
-            "statusId": 1
+            "status": "",
+            "statusId": 
         },
         "type": {
-            "type": "Payroll",
-            "typeId": 4
+            "type": "",
+            "typeId": 
         }
     }
 ]
 
 -----------------------------------------------------
 
-8) GET --> http://localhost:2006/reimbursements/author/userId/4
+8) GET --> http://localhost:2006/bookings/userId/4
 
 // Body
 
 (GET DOESN'T HAVE A BODY)
 
-// Output (FIND REIMBURSEMENT BY USER)
+// Output (FIND BOOKING BY USER)
 
 [
     {
-        "reimbursementId": 4,
-        "author": 2,
-        "amount": "669.00",
-        "dateSubmitted": "1990-02-02T11:16:00.000Z",
-        "dateResolved": "1990-02-02T11:56:00.000Z",
-        "description": "Purchased chupacabras to feed to Velociraptors",
-        "resolver": 3,
+        "bookingId": ,
+        "venue": ,
+        "payment": "",
+        "gigDate": "",
+        "dateSubmitted": "",
+        "dateResolved": "",
+        "description": "",
         "status": {
-            "status": "Approved",
-            "statusId": 2
+            "status": "",
+            "statusId": 
         },
         "type": {
-            "type": "Food",
-            "typeId": 3
+            "type": "",
+            "typeId": 
         }
     }
 ]
 
 -----------------------------------------------------
 
-9) POST --> http://localhost:2006/reimbursements
+9) POST --> http://localhost:2006/bookings
 
 // Body
 
    {
-        "author": 8,
-        "amount": "567.00",
-        "dateSubmitted": "1990-09-30T04:10:00.000Z",
-        "description": "Purchased a baby Stegosaurus",
-        "type": "Inventory"
+        "venue": ,
+        "payment": "",
+        "gigDate": "",
+        "dateSubmitted": "",
+        "description": "",
+        "type": ""
     }
 
-// Output (SUBMIT REIMBURSEMENT)
+// Output (SUBMIT BOOKING)
 
 
 
 -----------------------------------------------------
 
-10) PATCH --> http://localhost:2006/reimbursements
+10) PATCH --> http://localhost:2006/bookings
 
 // Body
 
 {
-    "reimbursementId": 5,
-    "author": 6,
-    "description": "Hired groundskeeper to dispose of dinosaur poop"
+    "bookingId": ,
+    "venue": ,
+    "description": ""
 }
 
-// Output (UPDATE REIMBURSEMENT)
+// Output (UPDATE BOOKING)
 
 {
-    "reimbursementId": 5,
-    "author": 6,
-    "description": "Hired groundskeeper to dispose of dinosaur poop"
+    "bookingId": ,
+    "venue": ,
+    "description": ""
 }
