@@ -9,7 +9,7 @@ export const userRouter = express.Router()
 userRouter.use(authenticationMiddleware) 
 
 //Find all Users 
-userRouter.get('/', authorizationMiddleware(['Admin', 'Finance Manager']), async (req:Request, res:Response, next:NextFunction) => { 
+userRouter.get('/', authorizationMiddleware(['Admin']), async (req:Request, res:Response, next:NextFunction) => { 
     try {
         let allUsers = await getAllUsers()
         res.json(allUsers)
@@ -50,7 +50,7 @@ userRouter.post('/', async (req:Request, res:Response, next:NextFunction) => {
 })
 
 //Find Users by Id
-userRouter.get('/:id', authorizationMiddleware(['Admin', 'Finance Manager', 'Current']), async (req:Request, res:Response, next:NextFunction) => {
+userRouter.get('/:id', authorizationMiddleware(['Admin', 'User', 'Current']), async (req:Request, res:Response, next:NextFunction) => {
     let {id} = req.params
     if(isNaN(+id)) {
         res.status(400).send('Id must be a number')
@@ -65,8 +65,8 @@ userRouter.get('/:id', authorizationMiddleware(['Admin', 'Finance Manager', 'Cur
     }
 })
 
-//Update User, we assume that Admin will have access to UserId for each user
-userRouter.patch('/', authorizationMiddleware(['Admin']), async (req:Request, res:Response, next:NextFunction) => {
+// Update User, we assume that Admin will have access to UserId for each user
+userRouter.patch('/', authorizationMiddleware(['Admin', 'User', 'Current']), async (req:Request, res:Response, next:NextFunction) => {
     let { userId,
         username,
         password,
