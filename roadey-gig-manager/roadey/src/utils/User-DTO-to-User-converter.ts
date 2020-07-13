@@ -1,7 +1,7 @@
 import { UserDTO } from "../dtos/user-dto";
 import { User } from "../models/user";
 
-//UserDTO takes objects in DB format & converts it to User model object(s)
+// UserDTO takes objects in DB format & converts it to User model object(s)
 export function UserDTOtoUserConverter(udto: UserDTO): User {
     return {
         userId: udto.user_id,
