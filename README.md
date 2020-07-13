@@ -31,18 +31,16 @@ The Booking model is used to represent a single, booked gig.
 ```javascript
 {
   bookingId: number, // primary key
-	venue: number,  // foreign key -> User, not null
+	venue: string,  // foreign key -> User, not null
 	payment: number,  // not null
   gigDate: number, // not null
   dateSubmitted: number, // not null
   dateResolved: number, // not null
   description: string, // not null
-  resolver: number, // foreign key -> User
   status: number, // foreign ey -> BookingStatus, not null
   type: number // foreign key -> BookingType
 }
 ```
-
 
 **BookingStatus**  
 The BookingStatus model is used to track the status of bookings. Status possibilities are `Pending`, `Postponed`, `Cancelled`, or `Booked`.
