@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { UserInputError } from '../errors/UserInputError'
 import { reimbursementStatusRouter } from './booking-status-router'
-import { reimbursementAuthorRouter } from './reimbursement-author-router'
+import { reimbursementAuthorRouter } from './booking-author-router'
 import { Reimbursement } from '../models/booking'
 import { submitOneReimbursement, updateOneReimbursement, getAllReimbursements } from '../daos/booking-dao'
 import { authenticationMiddleware } from '../middleware/authentication-middleware'
