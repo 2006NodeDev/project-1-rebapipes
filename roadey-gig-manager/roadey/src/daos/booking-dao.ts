@@ -1,9 +1,9 @@
-import { Reimbursement } from "../models/reimbursement";
+import { Reimbursement } from "../models/booking";
 import { PoolClient } from "pg";
 import { connectionPool } from ".";
-import { ReimbursementDTOtoReimbursementConverter } from "../utils/Reimbursement-DTO-to-Reimbursement-Converter";
-import { ReimbursementNotFoundError } from "../errors/ReimbursementNotFoundError";
-import { ReimbursementInputError } from "../errors/ReimbursementInputError";
+import { ReimbursementDTOtoReimbursementConverter } from "../utils/Booking-DTO-to-Booking-converter";
+import { ReimbursementNotFoundError } from "../errors/BookingNotFoundError";
+import { ReimbursementInputError } from "../errors/BookingInputError";
 
 // Get all Reimbursements
 export async function getAllReimbursements():Promise<Reimbursement[]> {

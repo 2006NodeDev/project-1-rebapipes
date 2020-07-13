@@ -1,5 +1,5 @@
-import { ReimbursementStatus } from "./reimbursement-status"
-import { ReimbursementType } from "./reimbursement-type"
+import { ReimbursementStatus } from "./booking-status"
+import { ReimbursementType } from "./booking-type"
 
 export class Reimbursement {
     reimbursementId: number //primary key
