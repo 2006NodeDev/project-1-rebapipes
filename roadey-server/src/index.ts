@@ -8,9 +8,14 @@ import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
 
 const app = express() //Creates complete express application
-app.use(express.json()) //Matches every HTTP verb, middleware
+app.use(express.json({limit:'50mb'}))//this is an example of middle ware
+//increase the maximum size of a body we can parse
+// the idea of middle ware is to run requests through partial processing and let them move forward through our application
+//express.json is a function that takes in the request - turns the body into a js object - and then we let the request go to the next function that it matches
+
 app.use(loggingMiddleware) //Logs out request method, ip address making request, and path of request
 app.use(sessionMiddleware) //Attaches a session object to the request where each unique connection to the server has a unique session
+//app.use(authenticationMiddleware)
 app.use(corsFilter) // make sure request is in allowed origins and types
 app.use('/users', userRouter) //Redirect all requests on /users to user-router
 app.use('/bookings', bookingRouter) //Redirect all requests on /bookings to booking-router
