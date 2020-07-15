@@ -2,11 +2,13 @@ import express, { Request, Response, NextFunction } from 'express'
 import { UserInputError } from '../errors/UserInputError'
 import { getAllUsers, saveOneUser, getUserById, updateOneUser } from '../daos/user-dao'
 import { User } from '../models/user'
-import { authenticationMiddleware } from '../middleware/authentication-middleware'
+//import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
+// our base path is /users
 
 export const userRouter = express.Router()
-userRouter.use(authenticationMiddleware) 
+
+//userRouter.use(authenticationMiddleware) 
 
 //Find all Users 
 userRouter.get('/', authorizationMiddleware(['Admin']), async (req:Request, res:Response, next:NextFunction) => { 
