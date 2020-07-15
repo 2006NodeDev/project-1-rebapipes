@@ -1,4 +1,4 @@
-import { lightlyburningLogin } from "../remote/lightlyburning-api/lightlyburning-login"
+import { lightlyburningLogin } from "../remote/roadey-api/roadey-login"
 
 export const loginTypes = {
     SUCCESSFUL_LOGIN: 'LB_SUCCESSFUL_LOGIN',

@@ -1,8 +1,8 @@
-import { lightlyburningClient } from ".";
+import { roadeyClient  } from ".";
 
 export const lightlyburningGetAllUsers = async () =>{
     try{
-        let response = await lightlyburningClient.get('/users')
+        let response = await roadeyClient .get('/users')
         return response.data
     }catch(e){
         console.log(e);

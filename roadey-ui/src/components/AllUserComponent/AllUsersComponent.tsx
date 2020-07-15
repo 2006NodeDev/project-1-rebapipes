@@ -1,6 +1,6 @@
   
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { lightlyburningGetAllUsers } from '../../remote/lightlyburning-api/lightlyburning-get-all-users'
+import { lightlyburningGetAllUsers } from '../../remote/roadey-api/roadey-get-all-users'
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay'
 import { User } from '../../models/User'
 

@@ -6,3 +6,8 @@ export interface User {
     role:string
     image?:string//the ? makes it optional
 }
+
+export interface Role {
+    roleId: number 
+    role: string
+  }

@@ -1,4 +1,4 @@
-import { lightlyburningClient } from "."
+import { roadeyClient  } from "."
 import { User } from "../../models/user";
 
 export const lightlyburningLogin = async (username:string, password:string) => {
@@ -7,7 +7,7 @@ export const lightlyburningLogin = async (username:string, password:string) => {
         password
     }
     try{
-        let response = await lightlyburningClient.post('/login', credentials)
+        let response = await roadeyClient .post('/login', credentials)
         console.log(response);
         return response.data//should be the user object
     } catch(e){

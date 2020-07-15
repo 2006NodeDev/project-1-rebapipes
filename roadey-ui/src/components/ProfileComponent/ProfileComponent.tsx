@@ -5,7 +5,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay';
 import { User } from '../../models/User';
 import { useParams} from 'react-router-dom'
-import { lightlyburningGetUserById } from '../../remote/lightlyburning-api/lightlyburning-get-by-id';
+import { lightlyburningGetUserById } from '../../remote/roadey-api/roadey-get-by-id';
 
 export const ProfileComponent:FunctionComponent<any> =  (props)=>{
     let [userProfile, changeUserProfile] = useState<null | User>(null)
