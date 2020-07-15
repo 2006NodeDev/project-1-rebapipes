@@ -1,11 +1,11 @@
 import { roadeyLogin } from "../remote/roadey-api/roadey-login"
 
 export const loginTypes = {
-    SUCCESSFUL_LOGIN: 'LB_SUCCESSFUL_LOGIN',
-    BAD_CREDENTIALS: 'LB_BAD_CREDENTIALS',
-    INTERNAL_SERVER: 'LB_LOGIN_INTERNAL_SERVER',
-    BAD_REQUEST: 'LB_LOGIN_BAD_REQUEST',
-    RESET_ERROR: 'LB_RESET_ERROR'
+    SUCCESSFUL_LOGIN: 'roadey_SUCCESSFUL_LOGIN',
+    INVALID_CREDENTIALS: 'roadey_INVALID_CREDENTIALS',
+    INTERNAL_SERVER: 'roadey_LOGIN_INTERNAL_SERVER',
+    BAD_REQUEST: 'roadey_LOGIN_BAD_REQUEST',
+    RESET_ERROR: 'roadey_RESET_ERROR'
 }
 
 //when it comes to async processes, we can't just return the action object
@@ -29,7 +29,7 @@ export const lbLoginActionMapper = (username:string, password:string) => async (
             })
         } else if (e.message.includes('401')){
             dispatch({
-                type:loginTypes.BAD_CREDENTIALS
+                type:loginTypes.INVALID_CREDENTIALS
             })
         }else {
             dispatch({

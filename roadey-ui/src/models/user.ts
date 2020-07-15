@@ -1,13 +1,12 @@
-export interface User {
-    userId:number//identifier
-    username:string
-    password:string
-    email:string
-    role:string
-    image?:string//the ? makes it optional
-}
 
-export interface Role {
-    roleId: number 
-    role: string
-  }
+import { Role } from "./Role";
+
+export interface User {
+    userId: number
+    username: string
+    password: string
+    firstName: string
+    lastName: string
+    email: string
+    role: Role
+}
