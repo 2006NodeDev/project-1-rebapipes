@@ -1,7 +1,7 @@
 import { roadeyClient  } from "."
-import { User } from "../../models/user";
+import { User } from "../../models/User";
 
-export const lightlyburningLogin = async (username:string, password:string) => {
+export const roadeyLogin = async (username:string, password:string) => {
     let credentials = {
         username,
         password

@@ -1,7 +1,7 @@
 import { roadeyClient  } from ".";
 import { User } from "../../models/User";
 
-export const lightlyburningSaveUser = async (newUser:User) => {
+export const roadeySaveUser = async (newUser:User) => {
     
     try{
         let response = await roadeyClient .post('/users', newUser)

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, SyntheticEvent } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { lightlyburningLogin } from '../../remote/roadey-api/roadey-login'
+import { roadeyLogin } from '../../remote/roadey-api/roadey-login'
 import {RouteComponentProps} from 'react-router-dom'
 
 //the interface called route component props just defines history match and location
@@ -28,7 +28,7 @@ export const LoginComponent:FunctionComponent<ILoginProps> = (props) => {
 
     const loginSubmit = async (e:SyntheticEvent) => {//sythentic events are react interface for converting between the many different types of browser events
         e.preventDefault()
-        let res = await lightlyburningLogin(username, password)
+        let res = await roadeyLogin(username, password)
         props.changeCurrentUser(res)
         changePassword('')
         props.history.push('/clicker')

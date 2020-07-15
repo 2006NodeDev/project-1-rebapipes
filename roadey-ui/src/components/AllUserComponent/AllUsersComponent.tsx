@@ -1,6 +1,6 @@
   
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { lightlyburningGetAllUsers } from '../../remote/roadey-api/roadey-get-all-users'
+import { roadeyGetAllUsers } from '../../remote/roadey-api/roadey-get-all-users'
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay'
 import { User } from '../../models/User'
 
@@ -18,7 +18,7 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
 
         //write an async function that can update state with fetched users
         const getUsers = async ()=>{
-            let response = await lightlyburningGetAllUsers()
+            let response = await roadeyGetAllUsers()
             changeAllUsers(response)
         }
 

@@ -1,4 +1,4 @@
-import { lightlyburningLogin } from "../remote/roadey-api/roadey-login"
+import { roadeyLogin } from "../remote/roadey-api/roadey-login"
 
 export const loginTypes = {
     SUCCESSFUL_LOGIN: 'LB_SUCCESSFUL_LOGIN',
@@ -15,7 +15,7 @@ export const loginTypes = {
 //and calls dispatch a second time with the real object
 export const lbLoginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
-        let currentUser = await lightlyburningLogin(username,password)
+        let currentUser = await roadeyLogin(username,password)
         dispatch({
             type:loginTypes.SUCCESSFUL_LOGIN,
             payload:{

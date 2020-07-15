@@ -1,6 +1,6 @@
 import { roadeyClient  } from "."
 
-export const lightlyburningGetUserById = async (userId:number) =>{
+export const roadeyGetUserById = async (userId:number) =>{
 
     try{
         let response = await roadeyClient .get(`/users/${userId}`)

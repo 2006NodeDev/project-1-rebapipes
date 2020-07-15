@@ -70,7 +70,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
                         {menuItems}
                     </Menu>
                     <Typography variant="h6" className={classes.title}>
-                        LightlyBurning
+                        Roadey
                 </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>

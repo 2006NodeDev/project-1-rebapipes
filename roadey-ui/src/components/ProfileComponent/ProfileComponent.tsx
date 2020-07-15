@@ -5,7 +5,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay';
 import { User } from '../../models/User';
 import { useParams} from 'react-router-dom'
-import { lightlyburningGetUserById } from '../../remote/roadey-api/roadey-get-by-id';
+import { roadeyGetUserById } from '../../remote/roadey-api/roadey-get-by-id';
 
 export const ProfileComponent:FunctionComponent<any> =  (props)=>{
     let [userProfile, changeUserProfile] = useState<null | User>(null)
@@ -16,7 +16,7 @@ export const ProfileComponent:FunctionComponent<any> =  (props)=>{
         //we define an async operation we want to run
         let getUser = async ()=>{
             //we await user info and then call a state updat function with it
-            let userInfo = await lightlyburningGetUserById(userId)
+            let userInfo = await roadeyGetUserById(userId)
             changeUserProfile(userInfo)
         }
         //if we haven't gotten a user profile yet

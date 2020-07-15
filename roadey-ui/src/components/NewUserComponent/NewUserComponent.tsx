@@ -2,7 +2,7 @@ import React, { FunctionComponent, SyntheticEvent, useState } from 'react'
 import { Button, TextField } from '@material-ui/core'
 import { User } from '../../models/User'
 import {toast} from 'react-toastify'
-import { lightlyburningSaveUser} from '../../remote/roadey-api/roadey-save-user'
+import { roadeySaveUser} from '../../remote/roadey-api/roadey-save-user'
 import { read } from 'fs'
 
 export const NewUserComponent: FunctionComponent<any> = (props) => {
@@ -59,7 +59,7 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
             image
         }
 
-        let res = await lightlyburningSaveUser(newUser)
+        let res = await roadeySaveUser(newUser)
 
     }
 
