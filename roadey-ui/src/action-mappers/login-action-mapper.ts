@@ -13,7 +13,7 @@ export const loginTypes = {
 //we have a solution called redux thunk
 //we will return the async function and redux thunk sits in the middle and intercepts the function 
 //and calls dispatch a second time with the real object
-export const lbLoginActionMapper = (username:string, password:string) => async (dispatch:any) => {
+export const roadeyLoginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
         let currentUser = await roadeyLogin(username,password)
         dispatch({

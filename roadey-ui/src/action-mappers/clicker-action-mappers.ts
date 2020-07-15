@@ -5,7 +5,6 @@ export const clickerTypes = {
     CLICKER_UPDATE_CLICKS: 'CLICKER_UPDATE_CLICKS'
 }
 
-
 //the number of clicks to go up or down by
 export function updateClicks(clickDelta:number){
     //this object we return is the action
