@@ -3,7 +3,7 @@ import { UserInputError } from '../errors/UserInputError'
 import { bookingStatusRouter } from './booking-status-router'
 import { bookingAuthorRouter } from './booking-author-router'
 import { Booking } from '../models/booking'
-import { submitOneBooking, updateOneBooking, getAllBookings } from '../daos/booking-dao'
+import { submitOneBooking, updateOneBooking, getAllBookings } from '../daos/SQL/booking-dao'
 import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 

@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { getBookingByStatus } from '../daos/booking-dao'
+import { getBookingByStatus } from '../daos/SQL/booking-dao'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 
 export const bookingStatusRouter = express.Router()
