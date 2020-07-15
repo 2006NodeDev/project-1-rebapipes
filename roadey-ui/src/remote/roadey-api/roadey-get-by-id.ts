@@ -7,6 +7,6 @@ export const roadeyGetUserById = async (userId:number) =>{
         return response.data
     } catch(e){
         console.log(e);
-        console.log('we should probably handle this');   
+        console.log('We should probably handle this');   
     }
 }

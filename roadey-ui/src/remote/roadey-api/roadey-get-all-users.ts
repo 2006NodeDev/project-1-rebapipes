@@ -7,7 +7,5 @@ export const roadeyGetAllUsers = async () =>{
     }catch(e){
         console.log(e);
         console.log('We should probably handle this');
-        
-        
     }
 }

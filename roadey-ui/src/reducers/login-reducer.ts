@@ -9,7 +9,7 @@ const initialState:ILoginState = {
 
 export const loginReducer = (state= initialState, action:AnyAction) => {
     switch (action.type) {
-        case loginTypes.BAD_CREDENTIALS:{
+        case loginTypes.INVALID_CREDENTIALS:{
             return {
                 ...state,
                 errorMessage:'Incorrect Username or Password'

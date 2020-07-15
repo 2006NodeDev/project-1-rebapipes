@@ -42,12 +42,10 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
         }
     }
 
-
-
     const submitUser = async (e: SyntheticEvent) => {
         e.preventDefault()
         if(password !== confirmPassword){
-            toast.error('Password Do Not Match')
+            toast.error('Passwords Do Not Match')
         }
 
         let newUser:User = {
@@ -60,9 +58,7 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
         }
 
         let res = await roadeySaveUser(newUser)
-
     }
-
 
     return (
         <div>
@@ -72,7 +68,7 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
                 <TextField id="standard-basic" type='password' label="confirm password" value={confirmPassword} onChange={updateConfirmPassword}/>
                 <TextField id="standard-basic" type='email' label="email" value={email} onChange={updateEmail}/>
                 {/* figure out how to do role on your own, look at select component from material ui */}
-                <label htmlFor='file'>Profile Pic</label>
+                <label htmlFor='file'>Profile Picture</label>
                 <input type='file' name='file' accept='image/*' onChange={updateImage}   />
                 <img src={image}/>
                 <Button variant="contained" type='submit'>Submit</Button>
