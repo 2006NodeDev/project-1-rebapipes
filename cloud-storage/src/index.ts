@@ -13,6 +13,4 @@ const storage = new Storage();
             contentType:'application/json'
         }
     })
-
-
 })()
