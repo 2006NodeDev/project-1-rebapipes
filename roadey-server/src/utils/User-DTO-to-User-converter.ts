@@ -12,7 +12,8 @@ export function UserDTOtoUserConverter(udto: UserDTO): User {
         email: udto.email,
         role: {
             role: udto.role,
-            roleId: udto.role_id
-        }
+            roleId: udto.role_id,
+        },
+        image:udto.image
     }
 }
