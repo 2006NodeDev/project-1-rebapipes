@@ -1,10 +1,10 @@
 import { PoolClient } from "pg";
 import { connectionPool } from ".";
-import { UserDTOtoUserConverter } from "../utils/User-DTO-to-User-Converter";
-import { User } from "../models/user";
-import { UserInputError } from "../errors/UserInputError";
-import { AuthenticationError } from "../errors/AuthenticationError";
-import { UserNotFoundError } from "../errors/UserNotFoundError";
+import { UserDTOtoUserConverter } from "../../utils/User-DTO-to-User-Converter";
+import { User } from "../../models/User";
+import { UserInputError } from "../../errors/UserInputError";
+import { AuthenticationError } from "../../errors/AuthenticationError";
+import { UserNotFoundError } from "../../errors/UserNotFoundError";
 
 // Find all Users
 export async function getAllUsers():Promise<User[]> {

@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { UserInputError } from '../errors/UserInputError'
-import { getAllUsers, saveOneUser, getUserById, updateOneUser } from '../daos/user-dao'
-import { User } from '../models/user'
+import { getAllUsers, saveOneUser, getUserById, updateOneUser } from '../daos/SQL/user-dao'
+import { User } from '../models/User'
 //import { authenticationMiddleware } from '../middleware/authentication-middleware'
 import { authorizationMiddleware } from '../middleware/authorization-middleware'
 // our base path is /users

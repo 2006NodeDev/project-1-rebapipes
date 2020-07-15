@@ -1,9 +1,9 @@
-import { Booking } from "../models/booking";
+import { Booking } from "../../models/booking";
 import { PoolClient } from "pg";
 import { connectionPool } from ".";
-import { BookingDTOtoBookingConverter } from "../utils/Booking-DTO-to-Booking-converter";
-import { BookingNotFoundError } from "../errors/BookingNotFoundError";
-import { BookingInputError } from "../errors/BookingInputError";
+import { BookingDTOtoBookingConverter } from "../../utils/Booking-DTO-to-Booking-Converter";
+import { BookingNotFoundError } from "../../errors/BookingNotFoundError";
+import { BookingInputError } from "../../errors/BookingInputError";
 
 // Get all Bookings
 export async function getAllBookings():Promise<Booking[]> {

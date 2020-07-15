@@ -1,5 +1,4 @@
-
-import { getAllUsers, getUserById, saveOneUser } from "../daos/user-dao";
+import { getAllUsers, getUserById, saveOneUser } from "../daos/SQL/user-dao";
 import { User } from "../models/User";
 
 //the most basic service function you will see
