@@ -5,13 +5,19 @@ import { bookingRouter } from './routers/booking-router'
 import { loginByUsernameAndPassword } from './daos/user-dao'
 import { AuthenticationError } from './errors/AuthenticationError'
 import { loggingMiddleware } from './middleware/logging-middleware'
+import { corsFilter } from './middleware/cors-filter'
 
 const app = express() //Creates complete express application
 app.use(express.json()) //Matches every HTTP verb, middleware
 app.use(loggingMiddleware) //Logs out request method, ip address making request, and path of request
 app.use(sessionMiddleware) //Attaches a session object to the request where each unique connection to the server has a unique session
+app.use(corsFilter) // make sure request is in allowed origins and types
 app.use('/users', userRouter) //Redirect all requests on /users to user-router
 app.use('/bookings', bookingRouter) //Redirect all requests on /bookings to booking-router
+
+app.get('/health', (req:Request,res:Response)=>{
+    res.sendStatus(200)
+})
 
 // Login 
 app.post('/login', async (req:Request, res:Response, next:NextFunction) => {
