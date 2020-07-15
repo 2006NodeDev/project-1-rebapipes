@@ -1,6 +1,5 @@
 import {Storage} from '@google-cloud/storage'
 
-
 const storage = new Storage();
 
 (async ()=>{
@@ -17,6 +16,3 @@ const storage = new Storage();
 
 
 })()
-
-
-

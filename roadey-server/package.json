@@ -8,7 +8,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "author": "2006NodeDev",
+  "author": "Reba Pipes",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
