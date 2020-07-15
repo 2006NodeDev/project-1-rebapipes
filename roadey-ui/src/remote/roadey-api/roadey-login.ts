@@ -1,5 +1,5 @@
 import { lightlyburningClient } from "."
-import { User } from "../../models/User";
+import { User } from "../../models/user";
 
 export const lightlyburningLogin = async (username:string, password:string) => {
     let credentials = {
