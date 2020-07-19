@@ -2,6 +2,7 @@ import { loginByUsernameAndPassword, getAllUsers, getUserById, saveOneUser, upda
 import { User } from "../models/User";
 import { saveProfilePicture } from "../daos/Cloud-Storage/user-images";
 import { bucketBaseUrl } from "../daos/Cloud-Storage";
+import { expressEventEmitter, customExpressEvents } from "../event-listeners";
 
 //Login a User
 export async function loginByUsernameAndPasswordService(username: string, password: string): Promise<User> {
@@ -19,7 +20,7 @@ export async function getUserByIdService(userId: number): Promise<User> {
 }
 
 //Create New Users
-export async function saveNewUserService(newUser: User): Promise<User> {
+export async function saveOneUserService(newUser: User): Promise<User> {
     //two major process to manage in this function
     try {
         let base64Image = newUser.image
