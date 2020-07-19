@@ -29,6 +29,7 @@ userRouter.post('/', async (req:Request, res:Response, next:NextFunction) => {
         firstName,
         lastName,
         email,
+        image,
         role } = req.body
     if(username && password && firstName && lastName && email && role) {
         let newUser: User = {
@@ -38,6 +39,7 @@ userRouter.post('/', async (req:Request, res:Response, next:NextFunction) => {
             firstName,
             lastName,
             email,
+            image,
             role
         }
         try {
@@ -76,6 +78,7 @@ userRouter.patch('/', authorizationMiddleware(['Admin', 'User', 'Current']), asy
         firstName,
         lastName,
         email,
+        image,
         role } = req.body
     if(!userId) { //update request must contain a userId
         res.status(400).send('Please enter a valid user Id')
@@ -91,6 +94,7 @@ userRouter.patch('/', authorizationMiddleware(['Admin', 'User', 'Current']), asy
             firstName,
             lastName,
             email,
+            image,
             role
         }
         updatedOneUser.username = username || undefined
@@ -98,6 +102,7 @@ userRouter.patch('/', authorizationMiddleware(['Admin', 'User', 'Current']), asy
         updatedOneUser.firstName = firstName || undefined
         updatedOneUser.lastName = lastName || undefined
         updatedOneUser.email = email || undefined
+        updatedOneUser.email = image || undefined
         updatedOneUser.role = role || undefined
         try {
             let result = await updateOneUser(updatedOneUser)

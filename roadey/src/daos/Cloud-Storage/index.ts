@@ -1,7 +1,8 @@
 //this is where we set up the cloud storage bucket and the like
-import {Storage} from '@google-cloud/storage'
+import {Storage} from '@google-cloud/storage';
+
 //bucket Name
-export const bucketName = 'node-dev-2006-image-bucket'
+export const bucketName = 'roadey-image-bucket';  // update to 'pictures.rebapipes.com'
 
 //full http path to that bucket // the base path for images
 export const bucketBaseUrl = `https://storage.googleapis.com/${bucketName}`

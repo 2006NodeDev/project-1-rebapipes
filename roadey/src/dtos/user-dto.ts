@@ -7,7 +7,7 @@ export class UserDTO {
     first_name: string
     last_name: string
   email: string
+  image?:string // path to the file in cloud storage, question mark makes it optional
   role_id: number
   role: string
-  image?:string//this is a path to the file in cloud storage
 }

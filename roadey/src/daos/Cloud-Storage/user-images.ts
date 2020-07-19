@@ -1,3 +1,4 @@
+
 import { imageBucket } from ".";
 
 export async function saveProfilePicture(contentType:string, imageBase64Data:string, fileName:string){

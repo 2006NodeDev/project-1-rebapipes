@@ -17,8 +17,10 @@ export async function getAllUsers():Promise<User[]> {
                                             u."first_name", 
                                             u."last_name", 
                                             u."email", 
+                                            u."image",
                                             r."role_id", 
-                                            r."role" from roadey.users u
+                                            r."role"
+                                            from roadey.users u
                                             left join roadey.roles r 
                                             on u."role" = r."role_id"
                                             order by u.user_id;`)
@@ -48,12 +50,12 @@ export async function saveOneUser(newUser:User):Promise<User> {
         let results = await client.query(`insert into roadey.users 
                                         ("username", "password", 
                                             "first_name", "last_name", 
-                                            "email", "role")
+                                            "email", "image", "role")
                                         values($1,$2,$3,$4,$5,$6) 
                                         returning "user_id"`,
                                         [newUser.username, newUser.password, 
                                             newUser.firstName, newUser.lastName, 
-                                            newUser.email, roleId])
+                                            newUser.email, newUser.image, roleId])
         newUser.userId = results.rows[0].user_id
         await client.query('COMMIT;')
         return newUser
@@ -80,8 +82,10 @@ export async function loginByUsernameAndPassword(username:string, password:strin
                                             u."first_name", 
                                             u."last_name", 
                                             u."email", 
+                                            u."image",
                                             r."role_id", 
-                                            r."role" from roadey.users u
+                                            r."role"
+                                            from roadey.users u
                                         left join roadey.roles r 
                                         on u."role" = r."role_id"
                                         where u."username" = $1 
@@ -113,8 +117,9 @@ export async function getUserById(id:number):Promise<User> {
                                                  u."first_name",
                                                  u."last_name",
                                                  u."email",
+                                                 u."image",
                                                  r."role_id", 
-                                                 r."role" 
+                                                 r."role"
                                               from roadey.users u 
                                             left join roadey.roles r 
                                               on u."role" = r."role_id" 
@@ -166,6 +171,11 @@ export async function updateOneUser(updatedOneUser:User):Promise<User> {
             await client.query(`update roadey.users set "email" = $1 
                                     where "user_id" = $2;`, 
                                     [updatedOneUser.email, updatedOneUser.userId])
+        }
+        if(updatedOneUser.image) {
+            await client.query(`update roadey.users set "image" = $1 
+                                    where "user_id" = $2;`, 
+                                    [updatedOneUser.image, updatedOneUser.userId])
         }
         if(updatedOneUser.role) {
             let roleId = await client.query(`select r."role_id" from roadey.roles r 
