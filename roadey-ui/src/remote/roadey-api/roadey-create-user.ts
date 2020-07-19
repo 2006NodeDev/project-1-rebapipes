@@ -1,13 +1,14 @@
 import { roadeyClient } from ".";
 import { User} from "../../models/User";
 
-export const roadeyCreateNewUser = async (username:string, password:string, firstName:string, lastName:string, email:string) => {
+export const roadeyCreateNewUser = async (username:string, password:string, firstName:string, lastName:string, email:string, image:string) => {
     let newUser: User = {
         userId: 0,
         username,
         password,
         firstName,
         lastName,
+        image,
         email,
         role:{role:"Employee", roleId:3}
     }

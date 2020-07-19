@@ -6,6 +6,10 @@ import { loginByUsernameAndPassword } from './daos/SQL/user-dao'
 import { AuthenticationError } from './errors/AuthenticationError'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { corsFilter } from './middleware/cors-filter'
+import { userTopic } from './messaging/index'
+import './event-listeners/new-user'
+
+console.log(userTopic)
 
 const app = express() //Creates complete express application
 app.use(express.json({limit:'50mb'}))//this is an example of middle ware

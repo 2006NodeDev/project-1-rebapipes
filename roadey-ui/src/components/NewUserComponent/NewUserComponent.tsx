@@ -44,20 +44,26 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
 
     const submitUser = async (e: SyntheticEvent) => {
         e.preventDefault()
-        if(password !== confirmPassword){
+
+        if (password !== confirmPassword) {
             toast.error('Passwords Do Not Match')
         }
-
-        let newUser:User = {
-            role: 'User',
-            username,
-            password,
-            email,
-            userId:0,
-            image
+        else {
+            let newUser: User = {
+                userId: 0,
+                username,
+                password,
+                firstName,
+                lastName,
+                email,
+                image,
+                role: { role: 'User', roleId: 2 },
+            }
+            //let res = await reactSaveUser(newUser)
+            await reactSaveUser(newUser)
+            props.history.push(`/login`)
+            //props.history.push('/login')
         }
-
-        let res = await roadeySaveUser(newUser)
     }
 
     return (
