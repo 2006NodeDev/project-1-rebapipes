@@ -1,24 +1,35 @@
+Project 1: Functionality Requirements (Users)
+
+-Users can create new accounts with the website [POST]
+-Users can login through the website [POST]
+-Users can see and update/edit their profile information [PATCH]
+-Users can see and update/edit their profile picture [PATCH]
+-Something (feature/functionality) of my choosing // Users can logout of their account [DELETE]
+
+-----------------------------------------------------
+
 1) POST --> http://localhost:2006/login
 
 // Body
 
 {
-    "username" : "",
-    "password" : ""
+    "username" : "Roadey",
+    "password" : "R04D3Y"
 }
 
 // Output (LOGIN BY USER)
 
 {
-    "userId": ,
-    "username": "",
-    "password": "",
-    "firstName": "",
-    "lastName": "",
-    "email": "",
+    "userId": 1,
+    "username": "Roadey",
+    "password": "R04D3Y",
+    "firstName": "Beckett",
+    "lastName": "Finch",
+    "email": "beckett.finch@roadey.com",
+    "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/cloud-computing.png",
     "role": {
-        "role": "",
-        "roleId": 
+        "role": "Admin",
+        "roleId": 1
     }
 }
 
@@ -29,22 +40,23 @@
 // Body
 
 {
-    "username" : "",
-    "password" : ""
+    "username" : "ParadiseLost",
+    "password" : "P4R4D153"
 }
 
 // Output (LOGIN BY USER)
 
 {
-    "userId": ,
-    "username": "",
-    "password": "",
-    "firstName": "",
-    "lastName": "",
-    "email": "",
+    "userId": 2,
+    "username": "ParadiseLost",
+    "password": "P4R4D153",
+    "firstName": "Kylo",
+    "lastName": "Otto",
+    "email": "kylo.otto@paradiselost.com",
+    "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/drum-3.png",
     "role": {
-        "role": "",
-        "roleId": 
+        "role": "User",
+        "roleId": 2
     }
 }
 
@@ -59,6 +71,139 @@
 // Output
 
 (FINDS USERS - ALL)
+
+[
+    {
+        "userId": 1,
+        "username": "Roadey",
+        "password": "R04D3Y",
+        "firstName": "Beckett",
+        "lastName": "Finch",
+        "email": "beckett.finch@roadey.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/cloud-computing.png",
+        "role": {
+            "role": "Admin",
+            "roleId": 1
+        }
+    },
+    {
+        "userId": 2,
+        "username": "ParadiseLost",
+        "password": "P4R4D153",
+        "firstName": "Kylo",
+        "lastName": "Otto",
+        "email": "kylo.otto@paradiselost.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/drum-3.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 3,
+        "username": "Seadog",
+        "password": "534D06",
+        "firstName": "Jessa",
+        "lastName": "Hart",
+        "email": "jessa.hart@seadog.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/banjo.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 4,
+        "username": "GhostHost",
+        "password": "6H057H057",
+        "firstName": "Zylan",
+        "lastName": "Vade",
+        "email": "zylan.vade@ghosthost.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/electric-guitar.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 5,
+        "username": "TheKarmaProject",
+        "password": "K4RM4",
+        "firstName": "Deiter",
+        "lastName": "Jeter",
+        "email": "deiter.jeter@thekarmaproject.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/folder.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 6,
+        "username": "AceofSpades",
+        "password": "AC30F5P4D35",
+        "firstName": "Ace",
+        "lastName": "Alcott",
+        "email": "ace.alcott@aceofspades.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/headphones.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 7,
+        "username": "ControlledChaos",
+        "password": "CH405",
+        "firstName": "Jebediah",
+        "lastName": "Lawless",
+        "email": "jebediah.lawless@controlledchaos.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/microphone-1.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 8,
+        "username": "TheoreticalNoise",
+        "password": "N015E",
+        "firstName": "Gage",
+        "lastName": "Mackie",
+        "email": "gage.mackie@theoreticalnoise.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/smartphone.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 9,
+        "username": "PaperGiants",
+        "password": "P4P3R614N75",
+        "firstName": "Clive",
+        "lastName": "Wilde",
+        "email": "clive.wilde@papergiants.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/musical-note.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    },
+    {
+        "userId": 10,
+        "username": "FreeRadicals",
+        "password": "FR33R4D1C4L5",
+        "firstName": "Teague",
+        "lastName": "Nox",
+        "email": "teague.nox@freeradicals.com",
+        "image": "/Users/there/Documents/GitHub/project-1-rebapipes/roadey-ui/public/user-images/turntable.png",
+        "role": {
+            "role": "User",
+            "roleId": 2
+        }
+    }
+]
 
 -----------------------------------------------------
 
@@ -98,7 +243,7 @@
 // Output (UPDATE USER)
 
 {
-    "userId": 8,
+    "userId": ,
     "username": "",
     "password": ""
 }
@@ -113,6 +258,179 @@
 
 // Output (FIND BOOKINGS - ALL)
 
+[
+    {
+        "bookingId": 1,
+        "venue": "First Avenue",
+        "payment": "5000.00",
+        "gigDate": "2021-01-11T16:30:00.000Z",
+        "dateSubmitted": "2020-01-24T08:30:00.000Z",
+        "dateResolved": "2020-01-24T08:40:00.000Z",
+        "description": "Minneapolis, MN",
+        "status": {
+            "status": "Booked",
+            "statusId": 4
+        },
+        "type": {
+            "type": "Opening",
+            "typeId": 1
+        }
+    },
+    {
+        "bookingId": 2,
+        "venue": "9:30 Club",
+        "payment": "7000.00",
+        "gigDate": "2021-02-14T15:30:00.000Z",
+        "dateSubmitted": "2020-01-30T09:00:00.000Z",
+        "dateResolved": "2020-01-30T09:36:00.000Z",
+        "description": "Washington, DC",
+        "status": {
+            "status": "Pending",
+            "statusId": 1
+        },
+        "type": {
+            "type": "Opening",
+            "typeId": 1
+        }
+    },
+    {
+        "bookingId": 4,
+        "venue": "Hollywood Bowl",
+        "payment": "15000.00",
+        "gigDate": "2021-04-19T14:30:00.000Z",
+        "dateSubmitted": "2020-02-02T11:16:00.000Z",
+        "dateResolved": "2020-02-02T11:56:00.000Z",
+        "description": "Los Angeles, CA",
+        "status": {
+            "status": "Cancelled",
+            "statusId": 3
+        },
+        "type": {
+            "type": "Supporting",
+            "typeId": 2
+        }
+    },
+    {
+        "bookingId": 3,
+        "venue": "Tower Theater",
+        "payment": "10000.00",
+        "gigDate": "2021-03-17T13:30:00.000Z",
+        "dateSubmitted": "2020-02-15T10:20:00.000Z",
+        "dateResolved": "2020-02-15T10:40:00.000Z",
+        "description": "Philadelphia, PA",
+        "status": {
+            "status": "Booked",
+            "statusId": 4
+        },
+        "type": {
+            "type": "Supporting",
+            "typeId": 2
+        }
+    },
+    {
+        "bookingId": 5,
+        "venue": "Madison Square Garden",
+        "payment": "18000.00",
+        "gigDate": "2021-05-26T10:30:00.000Z",
+        "dateSubmitted": "2020-02-23T09:19:00.000Z",
+        "dateResolved": "2020-02-23T09:29:00.000Z",
+        "description": "New York, NY",
+        "status": {
+            "status": "Postponed",
+            "statusId": 2
+        },
+        "type": {
+            "type": "Supporting",
+            "typeId": 2
+        }
+    },
+    {
+        "bookingId": 6,
+        "venue": "House of Blues",
+        "payment": "17000.00",
+        "gigDate": "2021-06-18T13:30:00.000Z",
+        "dateSubmitted": "2020-03-17T09:05:00.000Z",
+        "dateResolved": "2020-03-17T09:15:00.000Z",
+        "description": "Dallas, TX",
+        "status": {
+            "status": "Pending",
+            "statusId": 1
+        },
+        "type": {
+            "type": "Headlining",
+            "typeId": 3
+        }
+    },
+    {
+        "bookingId": 7,
+        "venue": "Red Rocks",
+        "payment": "25000.00",
+        "gigDate": "2021-07-04T11:30:00.000Z",
+        "dateSubmitted": "2020-04-06T11:30:00.000Z",
+        "dateResolved": "2020-04-06T11:45:00.000Z",
+        "description": "Morrison, CO",
+        "status": {
+            "status": "Booked",
+            "statusId": 4
+        },
+        "type": {
+            "type": "Headlining",
+            "typeId": 3
+        }
+    },
+    {
+        "bookingId": 8,
+        "venue": "Radio City Music Hall",
+        "payment": "14000.00",
+        "gigDate": "2021-08-10T12:30:00.000Z",
+        "dateSubmitted": "2020-05-10T06:02:00.000Z",
+        "dateResolved": "2020-05-10T06:24:00.000Z",
+        "description": "New York, NY",
+        "status": {
+            "status": "Cancelled",
+            "statusId": 3
+        },
+        "type": {
+            "type": "Supporting",
+            "typeId": 2
+        }
+    },
+    {
+        "bookingId": 9,
+        "venue": "Jay Pritzker Pavillion",
+        "payment": "12000.00",
+        "gigDate": "2021-09-20T11:30:00.000Z",
+        "dateSubmitted": "2020-05-28T12:37:00.000Z",
+        "dateResolved": "2020-05-28T12:57:00.000Z",
+        "description": "Chicago, IL",
+        "status": {
+            "status": "Postponed",
+            "statusId": 2
+        },
+        "type": {
+            "type": "Supporting",
+            "typeId": 2
+        }
+    },
+    {
+        "bookingId": 10,
+        "venue": "The Fillmore",
+        "payment": "20000.00",
+        "gigDate": "2021-10-31T13:30:00.000Z",
+        "dateSubmitted": "2020-06-11T13:44:00.000Z",
+        "dateResolved": "2020-06-11T13:54:00.000Z",
+        "description": "San Francisco, CA",
+        "status": {
+            "status": "Pending",
+            "statusId": 1
+        },
+        "type": {
+            "type": "Headlining",
+            "typeId": 3
+        }
+    }
+]
+
 -----------------------------------------------------
 
 7) GET --> http://localhost:2006/bookings/status/1 
@@ -125,20 +443,54 @@
 
 [
     {
-        "bookingId": ,
-        "venue": ,
-        "payment": "",
-        "gigDate": "",
-        "dateSubmitted": "",
-        "dateResolved": "",
-        "description": "",
+        "bookingId": 2,
+        "venue": "9:30 Club",
+        "payment": "7000.00",
+        "gigDate": "2021-02-14T15:30:00.000Z",
+        "dateSubmitted": "2020-01-30T09:00:00.000Z",
+        "dateResolved": "2020-01-30T09:36:00.000Z",
+        "description": "Washington, DC",
         "status": {
-            "status": "",
-            "statusId": 
+            "status": "Pending",
+            "statusId": 1
         },
         "type": {
-            "type": "",
-            "typeId": 
+            "type": "Opening",
+            "typeId": 1
+        }
+    },
+    {
+        "bookingId": 6,
+        "venue": "House of Blues",
+        "payment": "17000.00",
+        "gigDate": "2021-06-18T13:30:00.000Z",
+        "dateSubmitted": "2020-03-17T09:05:00.000Z",
+        "dateResolved": "2020-03-17T09:15:00.000Z",
+        "description": "Dallas, TX",
+        "status": {
+            "status": "Pending",
+            "statusId": 1
+        },
+        "type": {
+            "type": "Headlining",
+            "typeId": 3
+        }
+    },
+    {
+        "bookingId": 10,
+        "venue": "The Fillmore",
+        "payment": "20000.00",
+        "gigDate": "2021-10-31T13:30:00.000Z",
+        "dateSubmitted": "2020-06-11T13:44:00.000Z",
+        "dateResolved": "2020-06-11T13:54:00.000Z",
+        "description": "San Francisco, CA",
+        "status": {
+            "status": "Pending",
+            "statusId": 1
+        },
+        "type": {
+            "type": "Headlining",
+            "typeId": 3
         }
     }
 ]
@@ -205,6 +557,26 @@
 }
 
 // Output (UPDATE BOOKING)
+
+{
+    "bookingId": ,
+    "venue": ,
+    "description": ""
+}
+
+-----------------------------------------------------
+
+10) DELETE --> http://localhost:2006/users/4
+
+// Body
+
+{
+    "bookingId": ,
+    "venue": ,
+    "description": ""
+}
+
+// Output (LOGOUT USER)
 
 {
     "bookingId": ,

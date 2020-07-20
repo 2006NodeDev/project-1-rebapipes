@@ -2,7 +2,7 @@ import { loginByUsernameAndPassword, getAllUsers, getUserById, saveOneUser, upda
 import { User } from "../models/User";
 import { saveProfilePicture } from "../daos/Cloud-Storage/user-images";
 import { bucketBaseUrl } from "../daos/Cloud-Storage";
-import { expressEventEmitter, customExpressEvents } from "../event-listeners";
+//import { expressEventEmitter, customExpressEvents } from "../event-listeners";
 
 //Login a User
 export async function loginByUsernameAndPasswordService(username: string, password: string): Promise<User> {
