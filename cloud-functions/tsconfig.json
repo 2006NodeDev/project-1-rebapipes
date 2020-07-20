@@ -2,7 +2,7 @@
     "compilerOptions": {
       "types": ["node"],
       "outDir": "build/dist",
-      "module": "commonjs",
+      "module": "none",
       "target": "es5",
       "lib": ["es2018"],
       "sourceMap": true,
@@ -16,7 +16,7 @@
       "strictNullChecks": false,
       "suppressImplicitAnyIndexErrors": true,
       "noUnusedLocals": true,
-      "esModuleInterop": true,
+      "esModuleInterop": false,
       "baseUrl": ".",
       
     },
