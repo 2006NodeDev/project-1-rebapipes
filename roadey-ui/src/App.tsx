@@ -27,7 +27,7 @@ function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
   const classes = useStyles()
   return (
-    <div  className="container">
+    <div className={classes.root} style={ {border: '3px solid #ff5722' } }>
       <Router>
         <header><NavBarComponent user={currentUser}/></header>
         {/* <NavBarComponent user={currentUser}/> */}
@@ -45,6 +45,3 @@ function App() {
 }
 
 export default App;
-
-
-//<div className={classes.root} style={ {border: '3px solid #ff5722' } }>
