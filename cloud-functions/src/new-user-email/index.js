@@ -1,3 +1,4 @@
+
 let nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -11,8 +12,8 @@ const transporter = nodemailer.createTransport({
 const messageTemplate = {
     from: process.env['EMAIL'],
     to: '',
-    subject: 'Welcome to Roadey!',
-    text: 'Enjoy your new account - get booking those gigs!'
+    subject: 'Welcome to Puppy Pals!',
+    text: 'I hope you enjoy your new account :)'
 }
 
 /**
@@ -29,7 +30,7 @@ exports.newUserEmail = (event, context) => {
  
 // //for testing the function by mimicing a pub event
 // let payload = {
-//     username:'Alec',
+//     username:'Reba',
 //     jobTitle:'Complicated',
 //     email:'2006nodedev@gmail.com'
 // }
