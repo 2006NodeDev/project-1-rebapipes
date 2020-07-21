@@ -5,10 +5,6 @@ import { useParams } from 'react-router';
 import { editUser } from '../../remote/roadey-api/edit-user';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
-// interface EditUserProps {
-//     user: User | null
-// }
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     margin: {
@@ -37,10 +33,6 @@ export const EditProfile: FunctionComponent<any> = (props) => {
     let [firstName, changeFirstName] = useState('')
     let [lastName, changeLastName] = useState('')
     let [email, changeEmail] = useState('')
-    let [city, changeCity] = useState('')
-    let [state, changeState] = useState('')
-    let [dogName, changeDogName] = useState('')
-    let [breed, changeBreed] = useState('')
     let [image, changeImage] = useState(undefined)
 
     const updateUsername = (e: any) => {
@@ -88,42 +80,6 @@ export const EditProfile: FunctionComponent<any> = (props) => {
             changeEmail(e.currentTarget.email)
         }
     }
-    const updateCity = (e: any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== undefined) {
-            changeCity(e.currentTarget.value)
-        }
-        else {
-            changeCity(e.currentTarget.city)
-        }
-    }
-    const updateState = (e: any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== undefined) {
-            changeState(e.currentTarget.value)
-        }
-        else {
-            changeState(e.currentTarget.state)
-        }
-    }
-    const updateDogName = (e: any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== undefined) {
-            changeDogName(e.currentTarget.value)
-        }
-        else {
-            changeDogName(e.currentTarget.dogName)
-        }
-    }
-    const updateBreed = (e: any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== undefined) {
-            changeBreed(e.currentTarget.value)
-        }
-        else {
-            changeBreed(e.currentTarget.breed)
-        }
-    }
     const updateImage = (e: any) => {
         let file: File = e.currentTarget.files[0]
         let reader = new FileReader()
@@ -134,7 +90,6 @@ export const EditProfile: FunctionComponent<any> = (props) => {
             changeImage(reader.result)
         }
     }
-    
     const updateUser = async (e: SyntheticEvent) => {
         e.preventDefault()
         
@@ -145,12 +100,8 @@ export const EditProfile: FunctionComponent<any> = (props) => {
             firstName,
             lastName,
             email,
-            city,
-            state,
-            dogName,
-            breed,
+            image,
             role: { role: 'User', roleId: 2 },
-            image
         }
         try { 
 
@@ -192,10 +143,6 @@ export const EditProfile: FunctionComponent<any> = (props) => {
                     <TextField id="standard-basic" label="Update First Name" value={firstName} onChange={updateFirstName} />
                     <TextField id="standard-basic" label="Update Last Name" value={lastName} onChange={updateLastName} />
                     <TextField id="standard-basic" type='email' label="Update Email" value={email} onChange={updateEmail} />
-                    <TextField id="standard-basic" label="Update City" value={city} onChange={updateCity} />
-                    <TextField id="standard-basic" label="Update State" value={state} onChange={updateState} />
-                    <TextField id="standard-basic" label="Update Pet Name" value={dogName} onChange={updateDogName} />
-                    <TextField id="standard-basic" label="Update Pet Breed" value={breed} onChange={updateBreed} />
                 </Grid>
                 <br /><br />
                 <Button type='submit' variant="outlined" className={classes.button}>Save</Button>

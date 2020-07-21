@@ -42,7 +42,7 @@ export const LogOutComponent: FunctionComponent<any> = (props) => {
         track: {}
     })(Switch);
 
-    let userSession = 'http://localhost:2004/logout'
+    let userSession = 'http://localhost:2006/logout'
     console.log(userSession);
     const logoutSubmit = (e:SyntheticEvent) => { 
         //e.preventDefault()

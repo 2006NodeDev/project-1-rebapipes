@@ -75,7 +75,6 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       // <MenuItem onClick={handleClose}><Link to='/title'>Title</Link></MenuItem>,
       <MenuItem onClick={handleClose}><Link to={`/profile/${(props.user) ? props.user.userId : '0'}`}>My Profile</Link></MenuItem>,
       <MenuItem onClick={handleClose}><Link to={`/edit/${(props.user) ? props.user.userId : '0'}`}>Edit Profile</Link></MenuItem>,
-      <MenuItem onClick={handleClose}><Link to={'/location'}>Search By Location</Link></MenuItem>
     )
   }
   // menuItems.push(
@@ -122,7 +121,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
             {menuItems}
           </Menu>
           <Typography align="left" variant="h6" className={classes.title} >
-            Puppy Pals
+            Roadey
               </Typography>
           {/* {auth && (
             <div>

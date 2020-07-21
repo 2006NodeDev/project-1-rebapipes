@@ -28,7 +28,6 @@ export const ProfileComponent:FunctionComponent<any> =  (props) => {
         //else do nothing
     })
     
-
     //how do I do async stuff in a component?
     //especially becasue we rely on the request for the component to work
 
