@@ -1,7 +1,7 @@
 import { User } from "../../models/User"
 import { roadeyClient } from ".";
 
-export const newUserServer = async (newUser:User) =>{
+export const roadeyNewUser = async (newUser:User) =>{
 
     try {
         let response = await roadeyClient.post('/users', newUser)
