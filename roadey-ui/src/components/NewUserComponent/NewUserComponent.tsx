@@ -1,6 +1,6 @@
 import React, { FunctionComponent, SyntheticEvent, useState } from 'react';
 import { Button, TextField, FormControl, InputLabel, Select, makeStyles, createStyles, Theme, FormHelperText, Grid, Paper, IconButton } from '@material-ui/core';
-import {roadeySaveUser } from '../../remote/roadey-api/roadey-save-user';
+import { saveUser } from '../../remote/roadey-api/save-user';
 import { toast } from 'react-toastify';
 import { User } from '../../models/User';
 import classes from '*.module.css';
@@ -129,7 +129,7 @@ export const NewUserComponent: FunctionComponent<any> = (props) => {
                 role: { role: 'User', roleId: 2 }
             }
             //let res = await reactSaveUser(newUser)
-            await roadeySaveUser(newUser)
+            await saveUser(newUser)
             props.history.push(`/login`)
             //props.history.push('/login')
         }

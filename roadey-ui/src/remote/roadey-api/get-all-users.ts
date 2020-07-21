@@ -1,8 +1,8 @@
 import { roadeyClient } from "."
 
-export const roadeyGetUserById = async (userId:number) => {
+export const getAllUsers = async () => {
     try {
-        let response = await roadeyClient.get(`/users/${userId}`)
+        let response = await roadeyClient.get('/users')
         return response.data
     } catch (e) {
         console.log(e);

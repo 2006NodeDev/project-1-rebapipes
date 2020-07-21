@@ -1,4 +1,4 @@
-import { roadeyLogin } from "../remote/roadey-api/roadey-login"
+import { roadeyLogin } from "../remote/roadey-api/login"
 
 export const loginTypes = {
     SUCCESSFUL_LOGIN: 'roadey_SUCCESSFUL_LOGIN',

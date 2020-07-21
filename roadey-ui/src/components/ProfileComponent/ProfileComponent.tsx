@@ -4,7 +4,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { User } from '../../models/User';
 import { useParams} from 'react-router-dom'
-import { getUserById } from '../../remote/roadey-api/roadey-get-user-by-id';
+import { getUserById } from '../../remote/roadey-api/get-user-by-id';
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay';
 import { LoginComponent } from '../LoginComponent/LoginComponent';
 

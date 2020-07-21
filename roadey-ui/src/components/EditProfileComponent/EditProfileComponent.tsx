@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, SyntheticEvent } from 'react';
 import { User } from '../../models/User';
 import { Grid, TextField, Button, createStyles, Theme, makeStyles, IconButton } from '@material-ui/core';
 import { useParams } from 'react-router';
-import { editUser } from '../../remote/react-server-api/edit-user';
+import { editUser } from '../../remote/roadey-api/edit-user';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 // interface EditUserProps {

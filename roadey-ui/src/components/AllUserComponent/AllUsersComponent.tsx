@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { roadeyGetAllUsers } from '../../remote/roadey-api/roadey-get-all-users'
+import { getAllUsers } from '../../remote/roadey-api/get-all-users'
 import { UserDisplayComponent } from '../UserDisplayComponent/UserDisplay'
 import { User } from '../../models/User'
 import { GridList, GridListTile, ListSubheader, makeStyles, createStyles, Theme } from '@material-ui/core'
@@ -43,7 +43,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
 
         //write an async function that can update state with fetched users
         const getUsers = async () => {
-            let response = await roadeyGetAllUsers()
+            let response = await getAllUsers()
             changeAllUsers(response)
         }
 
