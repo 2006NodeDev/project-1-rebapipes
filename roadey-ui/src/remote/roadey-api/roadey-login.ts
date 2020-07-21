@@ -1,5 +1,4 @@
 import { roadeyClient  } from "."
-import { User } from "../../models/User";
 
 export const roadeyLogin = async (username:string, password:string) => {
     let credentials = {
