@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { roadeyBaseUrl } from '../../environment'
 
-
 // we will use this object to send off all of the other request we make to the lightlyburning api
 export const roadeyClient = axios.create({
     baseURL:roadeyBaseUrl,
