@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
-//import Paper from '@material-ui/core/Paper'
-//import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-//import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button'
 import { GridListTileBar, IconButton, GridListTile } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 
@@ -19,11 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
          justifyContent: 'space-around',
          overflow: 'hidden',
          backgroundColor: theme.palette.background.paper,
-         //'& > *': {
-         //  margin: theme.spacing(1),
-         //  width: theme.spacing(20),
-         //  height: theme.spacing(30),
-         //},
       },
       gridList: {
          display: 'flex',
@@ -34,9 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
       icon: {
          color: 'rgba(255, 255, 255, 0.54)',
       },
-      //paper:{
-      //     backgroundColor:'grey' 
-      // }
    }),
 );
 
