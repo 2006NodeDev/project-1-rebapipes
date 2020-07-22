@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
-            backgroundColor: theme.palette.background.paper
+            backgroundColor: '#000000'
         },
         gridList: {
             display: 'flex',

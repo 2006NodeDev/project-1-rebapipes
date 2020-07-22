@@ -27,7 +27,7 @@ function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
   const classes = useStyles()
   return (
-    <div className={classes.root} style={ {border: '3px solid #ff5722' } }>
+    <div className={classes.root} style={ {border: '3px solid #e85555' } }>
       <Router>
         <header><NavBarComponent user={currentUser}/></header>
         {/* <NavBarComponent user={currentUser}/> */}
@@ -36,8 +36,6 @@ function App() {
         <Route path='/profile/:userId' component={ProfileComponent} />
         <Route path='/users' component={AllUsersComponent} /> 
         <Route path='/new-user' component={NewUserComponent} />
-        {/* <Route path='/location' component={AllUsersInLocationComponent} /> */}
-        {/* <Route path='/location' render={(props) => ( <LocationComponent city={city, state} {...props} /> )} /> */}
         <ToastContainer position='bottom-right'/>
       </Router>
     </div>

@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         button: {
             //backgroundColor: '#ff5722',
-            color: '#ff5722',
-            borderColor: '#ff5722'
+            color: '#e85555',
+            borderColor: '#e85555'
         },
         input: {
             display: 'none',

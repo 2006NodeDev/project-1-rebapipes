@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
     },
     button: {
-        color: '#ff5722',
-        borderColor: '#ff5722'
+        color: '#e85555',
+        borderColor: '#e85555'
     },
   }),
 );

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       //minHeight: 0,
       maxHeight: 3,
-      backgroundColor: '#ff5722', //top of toolbar
+      backgroundColor: 'black', //top of toolbar
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'flex-start',
       paddingTop: 50,//theme.spacing(1),
       paddingBottom: 5,//theme.spacing(1),
-      backgroundColor: '#fbe9e7',
-      color: 'black',
-      borderBottom: 'dashed',
-      borderBottomColor: '#ff5722',
+      backgroundColor: 'black',
+      color: '#e85555',
+      borderBottom: 'solid',
+      borderBottomColor: '#e85555',
     },
     title: {
       flexGrow: 1,
