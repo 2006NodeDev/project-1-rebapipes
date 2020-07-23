@@ -120,8 +120,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
           >
             {menuItems}
           </Menu>
-          <Typography align="left" variant="h6" className={classes.title} >
+          <Typography align="center" variant="h6" className={classes.title} >
             Roadey
+            <br></br>
               </Typography>
           {/* {auth && (
             <div>
